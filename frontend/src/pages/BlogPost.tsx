@@ -92,8 +92,9 @@ export default function BlogPost() {
         </header>
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
-          <PortableText
-            value={post.body}
+          {post.body && (
+            <PortableText
+              value={post.body}
             components={{
               block: {
                 normal: ({ children }) => (
@@ -128,7 +129,8 @@ export default function BlogPost() {
                 ),
               },
             }}
-          />
+            />
+          )}
         </div>
         </article>
       </div>

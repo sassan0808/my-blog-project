@@ -1,3 +1,5 @@
+import { type PortableTextBlock } from '@portabletext/types'
+
 export interface Post {
   _id: string
   _createdAt: string
@@ -5,6 +7,6 @@ export interface Post {
   slug: {
     current: string
   } | null
-  body?: any[]
+  body?: PortableTextBlock[]
   publishedAt: string
 }
