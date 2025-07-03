@@ -12,15 +12,19 @@ function App() {
   return (
     <Router>
       <SEOHead title="Portfolio | 佐々木" description="フルスタックエンジニアのポートフォリオサイト" />
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<BlogList />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <div className="bg-black min-h-screen">
+        <Navigation />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/blog" element={<BlogList />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+      </div>
     </Router>
   )
 }
