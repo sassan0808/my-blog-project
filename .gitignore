@@ -1,12 +1,12 @@
 # Dependencies
 node_modules/
 frontend/node_modules/
-sanity-blog/node_modules/
+studio/node_modules/
 
 # Build outputs
 frontend/dist/
 frontend/build/
-sanity-blog/dist/
+studio/dist/
 
 # Environment variables
 .env
@@ -38,3 +38,7 @@ lerna-debug.log*
 # Temporary files
 *.tmp
 *.temp
+
+# Sanity
+.sanity/
+studio/.sanity/
