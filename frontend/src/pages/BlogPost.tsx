@@ -67,7 +67,7 @@ export default function BlogPost() {
         <SEOHead
           title={`${post.title} | My Blog`}
           description={post.title}
-          url={`${window.location.origin}/blog/${post.slug.current}`}
+          url={`${window.location.origin}/blog/${post.slug?.current}`}
         />
       )}
       <div className="min-h-screen bg-white dark:bg-gray-900">

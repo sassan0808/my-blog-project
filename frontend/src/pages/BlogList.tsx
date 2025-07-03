@@ -58,7 +58,7 @@ export default function BlogList() {
                 className="border-b border-gray-200 dark:border-gray-700 pb-6"
               >
                 <Link
-                  to={`/blog/${post.slug.current}`}
+                  to={`/blog/${post.slug?.current}`}
                   className="block hover:bg-gray-50 dark:hover:bg-gray-800 p-4 -mx-4 rounded-lg transition-colors"
                 >
                   <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">

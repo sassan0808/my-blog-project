@@ -42,3 +42,4 @@ lerna-debug.log*
 # Sanity
 .sanity/
 studio/.sanity/
+.vercel

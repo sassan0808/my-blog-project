@@ -147,7 +147,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {latestPosts.map((post) => (
-              <Link key={post._id} to={`/blog/${post.slug.current}`}>
+              <Link key={post._id} to={`/blog/${post.slug?.current}`}>
                 <Card hover className="p-6 h-full">
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white line-clamp-2">
