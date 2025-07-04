@@ -84,12 +84,12 @@ export default function Navigation() {
             </div>
 
             {/* Right Section */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <DarkModeToggle />
               
               {/* Mobile Menu Button */}
               <button 
-                className="md:hidden relative w-10 h-10 flex items-center justify-center"
+                className="md:hidden relative w-10 h-10 flex items-center justify-center ml-2"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 <div className="w-6 flex flex-col justify-center items-center">
