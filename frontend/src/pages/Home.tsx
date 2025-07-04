@@ -56,7 +56,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 overflow-hidden"
           style={{
-            background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15) 0%, transparent 25%)`,
+            background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 255, 255, 0.2) 0%, transparent 25%)`,
           }}
         />
 
