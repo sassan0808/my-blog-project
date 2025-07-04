@@ -77,5 +77,16 @@ export const projects: Project[] = [
     featured: true,
     createdAt: '2025-07-03',
     category: 'slide'
+  },
+  {
+    id: '8',
+    title: 'AI時代の新しい「学び方」研修',
+    description: 'AI技術の進歩に合わせて、効果的な学習方法とスキル開発のアプローチを提案する研修プログラム。',
+    longDescription: 'AI時代において必要とされる新しい学習スタイルと能力開発について体系的に解説。従来の知識習得型学習から、AI協働型の問題解決能力や創造性を重視した学びのフレームワークを実践的に紹介します。',
+    technologies: ['Genspark', '教育設計', '研修プログラム'],
+    liveUrl: 'https://nkgcvwbw.gensparkspace.com/',
+    featured: true,
+    createdAt: '2025-07-04',
+    category: 'slide'
   }
 ]
