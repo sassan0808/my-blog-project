@@ -44,5 +44,38 @@ export const projects: Project[] = [
     featured: true,
     createdAt: '2025-06-30',
     category: 'slide'
+  },
+  {
+    id: '5',
+    title: 'AI活用の二軸アプローチと日本のイノベーション展望',
+    description: 'AIを活用した日本のイノベーション戦略について、二軸アプローチから考察するプレゼンテーション。',
+    longDescription: '日本におけるAI活用の現状と課題を踏まえ、独自の二軸アプローチによるイノベーション戦略を提案。技術導入と人材育成の両面から、日本企業がAI時代に競争力を維持・向上させるための具体的な方法論を展開します。',
+    technologies: ['Genspark', 'AI戦略', 'プレゼンテーション'],
+    liveUrl: 'https://www.genspark.ai/slides?project_id=e6fe38b4-a73f-4a6c-bdf9-866b23f68cb3',
+    featured: true,
+    createdAt: '2025-07-01',
+    category: 'slide'
+  },
+  {
+    id: '6',
+    title: 'AI時代の冒険書：目的を捨て今日を紡ぐ旅',
+    description: 'AI時代における新しい生き方と働き方を探求する、インタラクティブなエージェント体験。',
+    longDescription: '従来の目的志向型の人生設計から脱却し、AI時代における新しい価値観と生き方を提案。日々の体験を重視し、予測不可能な変化を楽しむための思考法と実践方法を、対話形式で探求します。',
+    technologies: ['Genspark Agent', 'AI対話', 'ライフデザイン'],
+    liveUrl: 'https://www.genspark.ai/agents?id=02985348-0389-446a-bb55-73419b071941',
+    featured: true,
+    createdAt: '2025-07-02',
+    category: 'slide'
+  },
+  {
+    id: '7',
+    title: 'これからの時代に「旅する学び」と働き方',
+    description: 'リモートワークとAI時代における、場所に縛られない学びと働き方の新しいモデルを提示。',
+    longDescription: 'デジタルノマドやリモートワークが一般化する中で、「旅する学び」という新しい教育・成長モデルを提案。場所や時間に縛られない働き方と、継続的な学習を両立させるための実践的なフレームワークを紹介します。',
+    technologies: ['Genspark', 'リモートワーク', 'プレゼンテーション'],
+    liveUrl: 'https://www.genspark.ai/slides?project_id=b4618837-9915-438e-b25e-c9edc83abe82',
+    featured: true,
+    createdAt: '2025-07-03',
+    category: 'slide'
   }
 ]
