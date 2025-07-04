@@ -26,7 +26,7 @@ export const projects: Project[] = [
   {
     id: '3',
     title: 'AI小説リーダー',
-    description: 'AIが作成した小説を読むことができるリーダーアプリ。様々なジャンルのAI生成小説を快適に閲覧。',
+    description: 'AIが作成した小説を読むことができるリーダーアプリ。',
     longDescription: 'AIによって生成された小説作品を読むためのリーダーアプリケーションです。SF、ファンタジー、ミステリーなど様々なジャンルのAI小説を収録し、快適な読書体験を提供します。AIならではの独創的な物語や、人間では思いつかないような展開を楽しむことができます。',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     liveUrl: 'https://ai-shosetsu-miroku-9xqi-git-main-sassan0808-gmailcoms-projects.vercel.app',

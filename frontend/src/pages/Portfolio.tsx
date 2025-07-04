@@ -51,23 +51,24 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="min-h-screen py-12 bg-white dark:bg-gray-900">
+    <div className="min-h-screen pt-24 pb-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <h1 className="text-5xl font-extrabold mb-6">
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Portfolio
             </span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            これまでに手がけたプロジェクトの一部をご紹介します。
-            技術への情熱と創造性を込めて制作しました。
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            2025年6月からのバイブコーディングでの制作物を共有します。
+            まだ試作品の段階ですが、バイブコーディングを活用することで、
+            非エンジニアかつサラリーマンでも、空いた時間にゲーム感覚で制作物の作成が可能な時代となりました。
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
           {categories.map((category) => (
             <button
               key={category.id}
@@ -106,17 +107,17 @@ export default function Portfolio() {
                 )}
               </div>
 
-              <div className="p-6">
+              <div className="p-6 space-y-4">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-400 line-clamp-3">
                   {project.description}
                 </p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
@@ -128,7 +129,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
+                <div className="flex gap-3 mt-6">
                   {project.liveUrl && (
                     <Button
                       variant="primary"
@@ -164,7 +165,7 @@ export default function Portfolio() {
         )}
 
         {/* CTA Section */}
-        <div className="mt-20 text-center">
+        <div className="mt-24 text-center">
           <Card className="p-12 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-purple-900 border-0">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               一緒にプロジェクトを始めませんか？
