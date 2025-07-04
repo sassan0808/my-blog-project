@@ -8,7 +8,7 @@ const categories = [
   { id: 'all', name: '全て' },
   { id: 'web', name: 'Web' },
   { id: 'mobile', name: 'Mobile' },
-  { id: 'desktop', name: 'Desktop' },
+  { id: 'slide', name: 'スライド' },
   { id: 'other', name: 'その他' }
 ]
 

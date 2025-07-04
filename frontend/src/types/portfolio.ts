@@ -9,7 +9,7 @@ export interface Project {
   githubUrl?: string
   featured: boolean
   createdAt: string
-  category: 'web' | 'mobile' | 'desktop' | 'other'
+  category: 'web' | 'mobile' | 'slide' | 'other'
 }
 
 export interface Skill {

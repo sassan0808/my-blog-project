@@ -33,5 +33,16 @@ export const projects: Project[] = [
     featured: true,
     createdAt: '2024-11-20',
     category: 'web'
+  },
+  {
+    id: '4',
+    title: 'エコーチェンバー現象を乗りこなし、AI時代の「共創」を導くために',
+    description: 'AI時代における情報の偏りとエコーチェンバー現象について考察し、共創の可能性を探るプレゼンテーション。',
+    longDescription: 'AIが普及する現代において、エコーチェンバー現象がもたらす課題と可能性について深く掘り下げたプレゼンテーションです。情報の偏りを認識し、それを乗り越えることで、AI時代における真の「共創」を実現するための方法論を提示します。',
+    technologies: ['Genspark', 'AI分析', 'プレゼンテーション'],
+    liveUrl: 'https://www.genspark.ai/slides?project_id=00ef6e4e-dd0e-4ecf-97f6-c7ee0df363e2',
+    featured: true,
+    createdAt: '2025-06-30',
+    category: 'slide'
   }
 ]
