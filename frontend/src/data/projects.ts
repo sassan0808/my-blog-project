@@ -88,5 +88,27 @@ export const projects: Project[] = [
     featured: true,
     createdAt: '2025-07-04',
     category: 'slide'
+  },
+  {
+    id: '9',
+    title: '瞑想から始まる創造的思考プロセス',
+    description: '瞑想を起点とした創造性開発と、アイデア創出のための思考プロセスを体系化したプレゼンテーション。',
+    longDescription: '瞑想の実践を通じて創造的思考力を高める方法論を紹介。静寂の中から生まれるアイデアの質と、日常的な瞑想実践が創造性に与える影響について、実践的なアプローチとともに解説します。',
+    technologies: ['Genspark', '瞑想', '創造性開発'],
+    liveUrl: 'https://ydzhpmkb.gensparkspace.com/',
+    featured: true,
+    createdAt: '2025-07-05',
+    category: 'slide'
+  },
+  {
+    id: '10',
+    title: 'AI活用共有会〜文字起こしデータ保管の重要性〜',
+    description: 'AI時代における音声データの文字起こしと、そのデータ保管・活用の戦略的重要性について解説。',
+    longDescription: 'AI技術を活用した文字起こしサービスの効果的な利用方法と、蓄積されたデータの価値について詳しく解説。会議録、インタビュー、セミナーなどの音声データを資産として活用するためのベストプラクティスを共有します。',
+    technologies: ['AI文字起こし', 'データ管理', 'ナレッジマネジメント'],
+    liveUrl: 'https://tjaifilt.gensparkspace.com/',
+    featured: true,
+    createdAt: '2025-07-06',
+    category: 'slide'
   }
 ]
