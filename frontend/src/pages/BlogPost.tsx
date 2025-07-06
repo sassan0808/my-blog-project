@@ -5,6 +5,7 @@ import { client } from '../lib/sanity'
 import type { Post } from '../types/post'
 import SEOHead from '../components/SEOHead'
 import MarkdownText from '../components/MarkdownText'
+import { TagList } from '../components/TagList'
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -22,7 +23,13 @@ export default function BlogPost() {
           title,
           slug,
           body,
-          publishedAt
+          publishedAt,
+          tags,
+          "categories": categories[]->{
+            _id,
+            title,
+            description
+          }
         }`
         const data = await client.fetch(query, { slug })
         setPost(data)
@@ -107,6 +114,9 @@ export default function BlogPost() {
               </div>
             )}
           </div>
+          {post.tags && post.tags.length > 0 && (
+            <TagList tags={post.tags} size="medium" className="mt-4" />
+          )}
         </header>
 
         <div className="prose prose-lg dark:prose-invert max-w-none">

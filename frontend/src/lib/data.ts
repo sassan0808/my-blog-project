@@ -59,6 +59,7 @@ export class DataService {
         slug,
         publishedAt,
         status,
+        tags,
         "categories": categories[]->{
           _id,
           title,
@@ -137,6 +138,7 @@ export class DataService {
         slug,
         body,
         publishedAt,
+        tags,
         "categories": categories[]->{
           _id,
           title,

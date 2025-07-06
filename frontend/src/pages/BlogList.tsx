@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { DataService } from '../lib/data'
 import type { Post, Category } from '../types/post'
 import SEOHead from '../components/SEOHead'
+import { TagList } from '../components/TagList'
 
 export default function BlogList() {
   const [posts, setPosts] = useState<Post[]>([])
@@ -178,6 +179,9 @@ export default function BlogList() {
                       </div>
                     )}
                   </div>
+                  {post.tags && post.tags.length > 0 && (
+                    <TagList tags={post.tags} size="small" className="mb-2" />
+                  )}
                 </Link>
               </article>
             ))}
