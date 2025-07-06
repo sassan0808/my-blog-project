@@ -65,7 +65,11 @@ function displayArticlePreview(article: ArticleData) {
 // PortableTextに変換
 function convertToPortableText(content: string) {
   const lines = content.split('\n')
-  const blocks: any[] = []
+  const blocks: Array<{
+    _type: string
+    style: string
+    children: Array<{ _type: string; text: string }>
+  }> = []
   
   for (const line of lines) {
     if (!line.trim()) continue
@@ -205,10 +209,11 @@ async function main() {
           console.log('利用可能なカテゴリー: AI活用, 組織開発, Well-being')
           articleData.category = await question('カテゴリー: ')
           break
-        case '4':
+        case '4': {
           const tagInput = await question('タグ (カンマ区切り): ')
           articleData.tags = tagInput.split(',').map(t => t.trim())
           break
+        }
         case '5':
           articleData.excerpt = await question('抜粋: ')
           break
