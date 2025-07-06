@@ -37,7 +37,18 @@ export interface BlogPost {
     current: string
   }
   excerpt?: string
-  body: any[] // Portable Text blocks
+  body: Array<{
+    _type: 'block'
+    _key: string
+    style: string
+    markDefs: Array<Record<string, unknown>>
+    children: Array<{
+      _type: 'span'
+      _key: string
+      text: string
+      marks: string[]
+    }>
+  }> // Portable Text blocks
   author: {
     _ref: string
     _type: 'reference'
@@ -116,5 +127,5 @@ export interface ValidationError {
 export interface BlogError extends Error {
   code: string
   field?: string
-  details?: any
+  details?: Record<string, unknown>
 }

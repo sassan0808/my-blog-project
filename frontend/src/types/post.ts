@@ -58,7 +58,7 @@ export interface ApiResponse<T> {
 export interface BlogApiError extends Error {
   code: string
   statusCode?: number
-  details?: any
+  details?: Record<string, unknown>
 }
 
 // フィルター・ソート・ページネーション
