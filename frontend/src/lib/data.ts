@@ -2,9 +2,9 @@ import type { Project, Profile } from '../types/portfolio'
 import type { Category } from '../types/post'
 import type { PostsResponse, CategoriesResponse, ApiError } from '../types/api'
 
-// Simple cache implementation
+// Improved cache implementation with performance optimization
 const cache = new Map<string, { data: unknown; timestamp: number }>()
-const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
+const CACHE_DURATION = 10 * 60 * 1000 // 10 minutes (increased for better performance)
 
 function getCached(key: string): unknown | null {
   const cached = cache.get(key)

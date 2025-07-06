@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react'
 import { client } from '../lib/sanity'
 import type { Post } from '../types/post'
 import SEOHead from '../components/SEOHead'
+import MarkdownText from '../components/MarkdownText'
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -38,7 +39,10 @@ export default function BlogPost() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-white"></div>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-white mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">記事を読み込んでいます...</p>
+        </div>
       </div>
     )
   }
@@ -112,7 +116,7 @@ export default function BlogPost() {
             components={{
               block: {
                 normal: ({ children }) => (
-                  <p className="mb-4 text-gray-800 dark:text-gray-200">{children}</p>
+                  <MarkdownText>{children}</MarkdownText>
                 ),
                 h1: ({ children }) => (
                   <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -131,6 +135,11 @@ export default function BlogPost() {
                 ),
               },
               marks: {
+                strong: ({ children }) => (
+                  <strong className="font-bold text-gray-900 dark:text-white">
+                    {children}
+                  </strong>
+                ),
                 link: ({ children, value }) => (
                   <a
                     href={value.href}
