@@ -12,6 +12,8 @@
     "studio:build": "cd ../studio && npm run build",
     "studio:deploy": "cd ../studio && npm run deploy",
     "dev:all": "npm run dev & npm run studio:dev",
+    "vibe-blog": "tsx src/scripts/vibe-blog-demo.ts",
+    "test-system": "tsx src/scripts/test-optimized-system.ts",
     "create-post": "tsx src/scripts/create-blog-post.ts",
     "fix-slugs": "tsx src/scripts/fix-blog-slugs.ts",
     "test-sanity": "tsx src/scripts/test-sanity.ts"
