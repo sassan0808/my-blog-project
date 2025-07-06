@@ -9,18 +9,25 @@ export default function BlogList() {
   const [categories, setCategories] = useState<Category[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('📋 BlogList: Starting data fetch...')
       try {
         const [postsData, categoriesData] = await Promise.all([
           DataService.getBlogPosts(),
           DataService.getCategories()
         ])
+        console.log('📋 BlogList: Data fetched successfully', {
+          posts: postsData.length,
+          categories: categoriesData.length
+        })
         setPosts(postsData)
         setCategories(categoriesData)
       } catch (error) {
-        console.error('Error fetching data:', error)
+        console.error('📋 BlogList: Error fetching data:', error)
+        setError('データの読み込みに失敗しました。しばらくしてから再度お試しください。')
       } finally {
         setLoading(false)
       }
@@ -38,7 +45,27 @@ export default function BlogList() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-white"></div>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 dark:border-white mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">記事を読み込んでいます...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center p-8">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">エラー</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            再読み込み
+          </button>
+        </div>
       </div>
     )
   }
