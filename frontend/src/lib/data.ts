@@ -1,4 +1,5 @@
 import type { Project, Profile } from '../types/portfolio'
+import type { Category } from '../types/post'
 
 // データ層抽象化 - 将来のSanity移行を容易にするため
 export class DataService {
@@ -14,7 +15,12 @@ export class DataService {
         _createdAt,
         title,
         slug,
-        publishedAt
+        publishedAt,
+        "categories": categories[]->{
+          _id,
+          title,
+          description
+        }
       }`
       console.log('🔍 Executing Sanity query:', query)
       
@@ -54,9 +60,34 @@ export class DataService {
       title,
       slug,
       body,
-      publishedAt
+      publishedAt,
+      "categories": categories[]->{
+        _id,
+        title,
+        description
+      }
     }`
     return client.fetch(query, { slug })
+  }
+
+  static async getCategories(): Promise<Category[]> {
+    try {
+      const { client } = await import('./sanity')
+      const query = `*[_type == "category"] | order(title asc) {
+        _id,
+        title,
+        description
+      }`
+      return await client.fetch(query)
+    } catch (error) {
+      console.error('❌ Categories fetch error:', error)
+      // フォールバック: デフォルトカテゴリー
+      return [
+        { _id: 'ai', title: 'AI活用', description: 'AI技術の活用方法やトレンド' },
+        { _id: 'org', title: '組織変革', description: '組織改革やマネジメント' },
+        { _id: 'wellbeing', title: 'Well-being', description: '心身の健康と幸福' }
+      ]
+    }
   }
 
   // ポートフォリオデータ（モック - 将来Sanity化可能）

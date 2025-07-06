@@ -61,7 +61,7 @@ export default function Portfolio() {
             </span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            2025年6月からのバイブコーディングでの制作物を共有します。
+            2025年5月からのバイブコーディングでの制作物を共有します。
             まだ試作品の段階ですが、バイブコーディングを活用することで、
             非エンジニアかつサラリーマンでも、空いた時間にゲーム感覚で制作物の作成が可能な時代となりました。
           </p>

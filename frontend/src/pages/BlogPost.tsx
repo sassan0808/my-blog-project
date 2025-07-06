@@ -45,7 +45,7 @@ export default function BlogPost() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen pt-20 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             記事が見つかりませんでした
@@ -70,7 +70,7 @@ export default function BlogPost() {
           url={`${window.location.origin}/blog/${post.slug?.current}`}
         />
       )}
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="min-h-screen pt-20">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <header className="mb-8">
           <Link
@@ -82,13 +82,27 @@ export default function BlogPost() {
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {post.title}
           </h1>
-          <time className="text-gray-600 dark:text-gray-400">
-            {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
+          <div className="flex items-center gap-4">
+            <time className="text-gray-600 dark:text-gray-400">
+              {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+            {post.categories && post.categories.length > 0 && (
+              <div className="flex gap-2">
+                {post.categories.map((category) => (
+                  <span
+                    key={category._id}
+                    className="text-sm px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full"
+                  >
+                    {category.title}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
         </header>
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
