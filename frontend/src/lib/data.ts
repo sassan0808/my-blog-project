@@ -28,7 +28,7 @@ export class DataService {
     // Check cache first
     const cached = getCached(cacheKey)
     if (cached) {
-      return cached as any[]
+      return cached as { _id: string; title: string; slug: { current: string }; publishedAt: string; categories: { _id: string; title: string; description?: string }[] }[]
     }
     
     try {
@@ -55,7 +55,7 @@ export class DataService {
       console.log(`📊 Found ${result.length} posts`)
       
       // Filter out posts with empty slugs just in case
-      const validPosts = result.filter((post: any) => post.slug?.current && post.slug.current !== '')
+      const validPosts = result.filter((post: { slug?: { current: string } }) => post.slug?.current && post.slug.current !== '')
       console.log(`📊 Valid posts after filtering: ${validPosts.length}`)
       
       // Cache the result

@@ -55,7 +55,7 @@ async function debugSanity() {
     const posts = await client.fetch(postsQuery)
     console.log(`   ✅ Found ${posts.length} valid posts`)
     
-    posts.forEach((post: any, index: number) => {
+    posts.forEach((post: { _id: string; title: string; slug?: { current: string }; publishedAt?: string; categories?: { _id: string; title: string }[] }, index: number) => {
       console.log(`   Post ${index + 1}:`)
       console.log(`     Title: ${post.title}`)
       console.log(`     Slug: ${post.slug?.current || 'EMPTY'}`)
@@ -77,7 +77,7 @@ async function debugSanity() {
     const categories = await client.fetch(categoriesQuery)
     console.log(`   ✅ Found ${categories.length} categories`)
     
-    categories.forEach((cat: any) => {
+    categories.forEach((cat: { _id: string; title: string }) => {
       console.log(`     - ${cat.title} (${cat._id})`)
     })
   } catch (error) {
@@ -99,9 +99,9 @@ async function debugSanity() {
     const allPosts = await client.fetch(problemQuery)
     console.log(`   Total posts in database: ${allPosts.length}`)
     
-    const noSlug = allPosts.filter((p: any) => !p.hasSlug)
-    const emptySlug = allPosts.filter((p: any) => p.emptySlug)
-    const unpublished = allPosts.filter((p: any) => !p.hasPublishDate)
+    const noSlug = allPosts.filter((p: { hasSlug: boolean }) => !p.hasSlug)
+    const emptySlug = allPosts.filter((p: { emptySlug: boolean }) => p.emptySlug)
+    const unpublished = allPosts.filter((p: { hasPublishDate: boolean }) => !p.hasPublishDate)
     
     console.log(`   Posts without slug: ${noSlug.length}`)
     console.log(`   Posts with empty slug: ${emptySlug.length}`)
@@ -109,7 +109,7 @@ async function debugSanity() {
     
     if (emptySlug.length > 0) {
       console.log('\n   Posts with empty slugs:')
-      emptySlug.forEach((post: any) => {
+      emptySlug.forEach((post: { _id: string; title: string }) => {
         console.log(`     - ${post.title} (${post._id})`)
       })
     }

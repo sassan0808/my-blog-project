@@ -203,7 +203,7 @@ export default function BlogListOptimized() {
               <select
                 value={`${sortBy.field}_${sortBy.direction}`}
                 onChange={(e) => {
-                  const [field, direction] = e.target.value.split('_') as [any, 'asc' | 'desc']
+                  const [field, direction] = e.target.value.split('_') as ['publishedAt' | 'title', 'asc' | 'desc']
                   setSortBy({ field, direction })
                 }}
                 className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"

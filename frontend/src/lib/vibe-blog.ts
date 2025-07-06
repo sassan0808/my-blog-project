@@ -103,7 +103,7 @@ export class VibeBlog {
   /**
    * カテゴリーを追加
    */
-  async addCategory(name: string, description?: string): Promise<OperationResult<any>> {
+  async addCategory(name: string, description?: string): Promise<OperationResult<{ _id: string; title: string; description?: string }>> {
     console.log(`📁 カテゴリー「${name}」を作成中...`)
     
     const result = await this.manager.createCategory(name, description)
