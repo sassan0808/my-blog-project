@@ -26,11 +26,11 @@ export class DataService {
   static async getBlogPosts(): Promise<PostsResponse> {
     const cacheKey = 'blog-posts'
     
-    // キャッシュを無効化（デバッグ用）
-    // const cached = getCached(cacheKey)
-    // if (cached) {
-    //   return cached as { _id: string; title: string; slug: { current: string }; publishedAt: string; categories: { _id: string; title: string; description?: string }[] }[]
-    // }
+    // キャッシュチェック
+    const cached = getCached(cacheKey)
+    if (cached) {
+      return { posts: cached as any[] }
+    }
     
     try {
       console.log('🚀 DataService.getBlogPosts() 開始...')
@@ -46,7 +46,7 @@ export class DataService {
       logEnvironmentInfo()
       console.log('🔍 Sanity client loaded:', !!readClient)
       
-      const query = `*[_type == "post"] | order(publishedAt desc) {
+      const query = `*[_type == "post" && status == "published"] | order(publishedAt desc) {
         _id,
         _createdAt,
         title,

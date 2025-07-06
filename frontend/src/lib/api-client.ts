@@ -18,6 +18,7 @@ export const readClient = createClient({
   ...sanityConfig,
   useCdn: true,
   perspective: 'published',
+  stega: false, // ステガノグラフィー無効化
 })
 
 // 書き込み用クライアント（CDN無効、認証あり）
@@ -25,6 +26,7 @@ export const writeClient = createClient({
   ...sanityConfig,
   useCdn: false,
   token: sanityConfig.token,
+  stega: false, // ステガノグラフィー無効化
 })
 
 // デフォルトは読み取り専用
