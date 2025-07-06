@@ -12,10 +12,10 @@ async function main() {
       description
     }`
     const categories = await client.fetch(query)
-    console.log('📁 利用可能なカテゴリー:', categories.map(c => c.title))
+    console.log('📁 利用可能なカテゴリー:', categories.map((c: any) => c.title))
     
     // AI活用カテゴリーを選択
-    const aiCategory = categories.find(c => c.title === 'AI活用')
+    const aiCategory = categories.find((c: any) => c.title === 'AI活用')
     
     // 著者を取得
     const authorId = await getOrCreateAuthor('佐々木')

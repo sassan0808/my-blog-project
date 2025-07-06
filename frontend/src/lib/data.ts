@@ -98,12 +98,12 @@ export class DataService {
 
   static async getFeaturedProjects(): Promise<Project[]> {
     const projects = await this.getProjects()
-    return projects.filter(p => p.featured)
+    return projects.filter((p: Project) => p.featured)
   }
 
   static async getProject(id: string): Promise<Project | null> {
     const projects = await this.getProjects()
-    return projects.find(p => p.id === id) || null
+    return projects.find((p: Project) => p.id === id) || null
   }
 
   // プロフィールデータ（モック - 将来Sanity化可能）
