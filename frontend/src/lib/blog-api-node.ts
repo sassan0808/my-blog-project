@@ -2,7 +2,6 @@ import { client } from './sanity-node'
 import type { 
   Post, 
   Category, 
-  Author, 
   ApiResponse, 
   PostFilters,
   PostSort,
@@ -24,7 +23,7 @@ export class BlogApiNode {
   ): Promise<ApiResponse<PostsResponse>> {
     try {
       // Sanityクエリの構築
-      let conditions: string[] = ['_type == "post"']
+      const conditions: string[] = ['_type == "post"']
       
       if (filters.status) {
         conditions.push(`status == "${filters.status}"`)

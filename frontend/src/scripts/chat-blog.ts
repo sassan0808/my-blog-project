@@ -37,13 +37,5 @@ export async function postFromChat(title: string, content: string, options?: {
   }
 }
 
-// 使用例
-async function example() {
-  // この関数を呼ぶだけで、チャットの内容がブログになる！
-  await postFromChat(
-    "チャット投稿テスト",
-    "この記事は、チャットでの指示からそのまま作成されました！"
-  )
-}
 
 export default postFromChat

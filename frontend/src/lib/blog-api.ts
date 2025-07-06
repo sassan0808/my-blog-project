@@ -1,24 +1,9 @@
-// 環境に応じたクライアントの取得
-async function getClient() {
-  try {
-    if (typeof window !== 'undefined') {
-      const { client } = await import('./sanity')
-      return client
-    } else {
-      const { client } = await import('./sanity-node')
-      return client
-    }
-  } catch {
-    const { client } = await import('./sanity')
-    return client
-  }
-}
+import { client } from './sanity'
 import type { 
   Post, 
   Category, 
   Author, 
-  ApiResponse, 
-  BlogApiError,
+  ApiResponse,
   PostFilters,
   PostSort,
   PostPagination,
@@ -30,7 +15,7 @@ import type {
  */
 export class BlogApi {
   private static instance: BlogApi
-  private cache = new Map<string, { data: any; timestamp: number }>()
+  private cache = new Map<string, { data: unknown; timestamp: number }>()
   private readonly CACHE_TTL = 5 * 60 * 1000 // 5分
 
   static getInstance(): BlogApi {
@@ -52,11 +37,11 @@ export class BlogApi {
       const cacheKey = `posts_${JSON.stringify({ filters, sort, pagination })}`
       const cached = this.getFromCache(cacheKey)
       if (cached) {
-        return { success: true, data: cached }
+        return { success: true, data: cached as PostsResponse }
       }
 
       // Sanityクエリの構築
-      let conditions: string[] = ['_type == "post"']
+      const conditions: string[] = ['_type == "post"']
       
       // フィルター条件
       if (filters.status) {
@@ -168,7 +153,7 @@ export class BlogApi {
       const cacheKey = `post_${slug}`
       const cached = this.getFromCache(cacheKey)
       if (cached) {
-        return { success: true, data: cached }
+        return { success: true, data: cached as Post }
       }
 
       const query = `*[_type == "post" && slug.current == $slug][0] {
@@ -239,7 +224,7 @@ export class BlogApi {
       const cacheKey = 'categories'
       const cached = this.getFromCache(cacheKey)
       if (cached) {
-        return { success: true, data: cached }
+        return { success: true, data: cached as Category[] }
       }
 
       const query = `*[_type == "category" && isActive == true] | order(order asc, title asc) {
@@ -276,7 +261,7 @@ export class BlogApi {
       const cacheKey = 'authors'
       const cached = this.getFromCache(cacheKey)
       if (cached) {
-        return { success: true, data: cached }
+        return { success: true, data: cached as Author[] }
       }
 
       const query = `*[_type == "author"] | order(name asc) {
@@ -309,7 +294,7 @@ export class BlogApi {
       const cacheKey = `related_${postId}_${limit}`
       const cached = this.getFromCache(cacheKey)
       if (cached) {
-        return { success: true, data: cached }
+        return { success: true, data: cached as Post[] }
       }
 
       // 現在の記事のカテゴリーを取得
@@ -370,7 +355,7 @@ export class BlogApi {
 
   // Private Methods
 
-  private getFromCache(key: string): any | null {
+  private getFromCache(key: string): unknown | null {
     const cached = this.cache.get(key)
     if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
       console.log(`📦 Cache hit: ${key}`)
@@ -379,7 +364,7 @@ export class BlogApi {
     return null
   }
 
-  private setCache(key: string, data: any): void {
+  private setCache(key: string, data: unknown): void {
     this.cache.set(key, { data, timestamp: Date.now() })
   }
 

@@ -2,10 +2,10 @@ import type { Project, Profile } from '../types/portfolio'
 import type { Category } from '../types/post'
 
 // Simple cache implementation
-const cache = new Map<string, { data: any; timestamp: number }>()
+const cache = new Map<string, { data: unknown; timestamp: number }>()
 const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
 
-function getCached(key: string): any | null {
+function getCached(key: string): unknown | null {
   const cached = cache.get(key)
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
     console.log(`📦 Cache hit for ${key}`)
@@ -15,7 +15,7 @@ function getCached(key: string): any | null {
   return null
 }
 
-function setCache(key: string, data: any): void {
+function setCache(key: string, data: unknown): void {
   cache.set(key, { data, timestamp: Date.now() })
 }
 
@@ -28,7 +28,7 @@ export class DataService {
     // Check cache first
     const cached = getCached(cacheKey)
     if (cached) {
-      return cached
+      return cached as any[]
     }
     
     try {
@@ -116,7 +116,7 @@ export class DataService {
     // Check cache first
     const cached = getCached(cacheKey)
     if (cached) {
-      return cached
+      return cached as Category[]
     }
     
     try {

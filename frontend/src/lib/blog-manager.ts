@@ -83,7 +83,7 @@ export class BlogManager {
       
       return {
         success: true,
-        data: result as BlogPost,
+        data: result as unknown as BlogPost,
         message: `記事「${input.title}」を${doc.status === 'published' ? '公開' : '下書き保存'}しました`
       }
 
@@ -102,7 +102,7 @@ export class BlogManager {
    */
   async updatePost(id: string, input: UpdatePostInput): Promise<OperationResult<BlogPost>> {
     try {
-      const patches: any = {}
+      const patches: Record<string, unknown> = {}
 
       if (input.title) patches.title = input.title
       if (input.content) patches.body = this.convertToPortableText(input.content)
@@ -126,7 +126,7 @@ export class BlogManager {
 
       return {
         success: true,
-        data: result as BlogPost,
+        data: result as unknown as BlogPost,
         message: `記事を更新しました`
       }
 
@@ -206,7 +206,7 @@ export class BlogManager {
       
       return {
         success: true,
-        data: result as BlogCategory,
+        data: result as unknown as BlogCategory,
         message: `カテゴリー「${name}」を作成しました`
       }
 
@@ -240,7 +240,7 @@ export class BlogManager {
       
       return {
         success: true,
-        data: result as BlogAuthor,
+        data: result as unknown as BlogAuthor,
         message: `著者「${name}」を作成しました`
       }
 
