@@ -11,15 +11,18 @@
     "studio:dev": "cd ../studio && npm run dev",
     "studio:build": "cd ../studio && npm run build",
     "studio:deploy": "cd ../studio && npm run deploy",
-    "dev:all": "npm run dev & npm run studio:dev"
+    "dev:all": "npm run dev & npm run studio:dev",
+    "create-post": "tsx src/scripts/create-blog-post.ts"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.1",
     "@portabletext/types": "^2.0.13",
     "@sanity/client": "^7.6.0",
+    "@types/uuid": "^10.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.3"
+    "react-router-dom": "^7.6.3",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
@@ -27,12 +30,14 @@
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",
     "autoprefixer": "^10.4.21",
+    "dotenv": "^17.0.1",
     "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.2.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.20.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
     "vite": "^7.0.0"
