@@ -1,5 +1,6 @@
 import type { Project, Profile } from '../types/portfolio'
 import type { Category } from '../types/post'
+import type { PostsResponse, CategoriesResponse, ApiError } from '../types/api'
 
 // Simple cache implementation
 const cache = new Map<string, { data: unknown; timestamp: number }>()
@@ -22,7 +23,7 @@ function setCache(key: string, data: unknown): void {
 // データ層抽象化 - 将来のSanity移行を容易にするため
 export class DataService {
   // ブログデータ（既存のSanity）
-  static async getBlogPosts() {
+  static async getBlogPosts(): Promise<PostsResponse> {
     const cacheKey = 'blog-posts'
     
     // キャッシュを無効化（デバッグ用）
@@ -40,9 +41,10 @@ export class DataService {
       console.log('  VITE_SANITY_DATASET:', import.meta.env.VITE_SANITY_DATASET)
       console.log('  VITE_SANITY_TOKEN:', import.meta.env.VITE_SANITY_TOKEN ? '[PRESENT]' : '[MISSING]')
       
-      // 既存のSanity client使用
-      const { client } = await import('./sanity')
-      console.log('🔍 Sanity client loaded:', !!client)
+      // 統一されたAPI clientを使用
+      const { readClient, logEnvironmentInfo } = await import('./api-client')
+      logEnvironmentInfo()
+      console.log('🔍 Sanity client loaded:', !!readClient)
       
       const query = `*[_type == "post"] | order(publishedAt desc) {
         _id,
@@ -60,7 +62,7 @@ export class DataService {
       console.log('🔍 Executing Sanity query:', query)
       
       console.log('⏳ Sanity API呼び出し中...')
-      const result = await client.fetch(query)
+      const result = await readClient.fetch(query)
       console.log('✅ Sanity API response received!')
       console.log('🔍 Raw Sanity response:', result)
       console.log(`📊 Found ${result?.length || 0} posts`)
@@ -79,7 +81,7 @@ export class DataService {
       // Cache the result
       setCache(cacheKey, publishedPosts)
       
-      return publishedPosts
+      return { posts: publishedPosts }
     } catch (error) {
       console.error('❌ Sanity fetch error:', error)
       console.error('❌ Error details:', {
@@ -89,78 +91,94 @@ export class DataService {
         cause: (error as Error & { cause?: unknown }).cause
       })
       
-      // フォールバック: 開発用ダミーデータを返す
+      // エラー詳細を含む情報を返す
+      const apiError = error as ApiError
+      const errorMessage = `Sanity接続エラー: ${apiError.message}`
       console.log('🔄 Returning fallback dummy data due to Sanity error')
-      console.log('🔄 User will see sample posts instead of real content')
-      return [
-        {
-          _id: 'dummy-1',
-          _createdAt: '2025-01-01',
-          title: 'サンプル記事 1',
-          slug: { current: 'sample-post-1' },
-          publishedAt: '2025-01-01',
-          categories: []
-        },
-        {
-          _id: 'dummy-2', 
-          _createdAt: '2025-01-02',
-          title: 'サンプル記事 2',
-          slug: { current: 'sample-post-2' },
-          publishedAt: '2025-01-02',
-          categories: []
-        }
-      ]
+      console.log('🔄 User will see sample posts with error info')
+      
+      return {
+        posts: [
+          {
+            _id: 'dummy-1',
+            _createdAt: '2025-01-01',
+            title: 'サンプル記事 1',
+            slug: { current: 'sample-post-1' },
+            publishedAt: '2025-01-01',
+            categories: []
+          },
+          {
+            _id: 'dummy-2', 
+            _createdAt: '2025-01-02',
+            title: 'サンプル記事 2',
+            slug: { current: 'sample-post-2' },
+            publishedAt: '2025-01-02',
+            categories: []
+          }
+        ],
+        error: errorMessage
+      }
     }
   }
 
   static async getBlogPost(slug: string) {
-    const { client } = await import('./sanity')
-    const query = `*[_type == "post" && slug.current == $slug][0] {
-      _id,
-      _createdAt,
-      title,
-      slug,
-      body,
-      publishedAt,
-      "categories": categories[]->{
+    try {
+      const { readClient } = await import('./api-client')
+      const query = `*[_type == "post" && slug.current == $slug][0] {
         _id,
+        _createdAt,
         title,
-        description
-      }
-    }`
-    return client.fetch(query, { slug })
+        slug,
+        body,
+        publishedAt,
+        "categories": categories[]->{
+          _id,
+          title,
+          description
+        }
+      }`
+      return await readClient.fetch(query, { slug })
+    } catch (error) {
+      console.error('❌ Individual post fetch error:', error)
+      return null
+    }
   }
 
-  static async getCategories(): Promise<Category[]> {
+  static async getCategories(): Promise<CategoriesResponse> {
     const cacheKey = 'categories'
     
     // Check cache first
     const cached = getCached(cacheKey)
     if (cached) {
-      return cached as Category[]
+      return { categories: cached as Category[] }
     }
     
     try {
-      const { client } = await import('./sanity')
+      const { readClient } = await import('./api-client')
       const query = `*[_type == "category"] | order(title asc) {
         _id,
         title,
         description
       }`
-      const result = await client.fetch(query)
+      const result = await readClient.fetch(query)
       
       // Cache the result
       setCache(cacheKey, result)
       
-      return result
+      return { categories: result }
     } catch (error) {
       console.error('❌ Categories fetch error:', error)
       // フォールバック: デフォルトカテゴリー
-      return [
-        { _id: 'ai', title: 'AI活用', description: 'AI技術の活用方法やトレンド' },
-        { _id: 'org', title: '組織変革', description: '組織改革やマネジメント' },
-        { _id: 'wellbeing', title: 'Well-being', description: '心身の健康と幸福' }
-      ]
+      const apiError = error as ApiError
+      const errorMessage = `カテゴリー取得エラー: ${apiError.message}`
+      return {
+        categories: [
+          { _id: 'ai', title: 'AI活用', description: 'AI技術の活用方法やトレンド' },
+          { _id: 'org', title: '組織変革', description: '組織改革やマネジメント' },
+          { _id: 'wellbeing', title: 'Well-being', description: '心身の健康と幸福' }
+        ],
+        error: errorMessage
+      }
     }
   }
 

@@ -10,21 +10,31 @@ export default function BlogList() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [apiError, setApiError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
       console.log('📋 BlogList: Starting data fetch...')
       try {
-        const [postsData, categoriesData] = await Promise.all([
+        const [postsResponse, categoriesResponse] = await Promise.all([
           DataService.getBlogPosts(),
           DataService.getCategories()
         ])
         console.log('📋 BlogList: Data fetched successfully', {
-          posts: postsData.length,
-          categories: categoriesData.length
+          posts: postsResponse.posts.length,
+          categories: categoriesResponse.categories.length
         })
-        setPosts(postsData)
-        setCategories(categoriesData)
+        setPosts(postsResponse.posts)
+        setCategories(categoriesResponse.categories)
+        
+        // API エラーがあれば記録
+        const errors = []
+        if (postsResponse.error) errors.push(postsResponse.error)
+        if (categoriesResponse.error) errors.push(categoriesResponse.error)
+        
+        if (errors.length > 0) {
+          setApiError(errors.join(' | '))
+        }
       } catch (error) {
         console.error('📋 BlogList: Error fetching data:', error)
         setError('データの読み込みに失敗しました。しばらくしてから再度お試しください。')
@@ -82,6 +92,21 @@ export default function BlogList() {
         <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">
           ブログ記事一覧
         </h1>
+        
+        {/* API エラー表示 */}
+        {apiError && (
+          <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
+            <div className="flex items-center gap-2">
+              <span className="text-yellow-600 dark:text-yellow-400">⚠️</span>
+              <p className="text-sm text-yellow-800 dark:text-yellow-200 font-medium">
+                API接続エラー（フォールバックデータを表示中）
+              </p>
+            </div>
+            <p className="text-xs text-yellow-700 dark:text-yellow-300 mt-1">
+              {apiError}
+            </p>
+          </div>
+        )}
         
         {/* カテゴリーフィルター */}
         <div className="mb-8">

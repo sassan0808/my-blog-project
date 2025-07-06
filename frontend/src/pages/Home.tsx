@@ -14,12 +14,12 @@ export default function Home() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [projects, posts] = await Promise.all([
+        const [projects, postsResponse] = await Promise.all([
           DataService.getFeaturedProjects(),
           DataService.getBlogPosts()
         ])
         setFeaturedProjects(projects)
-        setLatestPosts(posts.slice(0, 3))
+        setLatestPosts(postsResponse.posts.slice(0, 3))
       } catch (error) {
         console.error('Error loading home data:', error)
       }
