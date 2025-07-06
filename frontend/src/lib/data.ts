@@ -1,6 +1,6 @@
 import type { Project, Profile } from '../types/portfolio'
 import type { Category, Post } from '../types/post'
-import type { PostsResponse, CategoriesResponse, ApiError } from '../types/api'
+import type { PostsResponse, CategoriesResponse } from '../types/api'
 
 // Improved cache implementation with performance optimization
 const cache = new Map<string, { data: unknown; timestamp: number }>()
@@ -41,10 +41,16 @@ export class DataService {
       console.log('  VITE_SANITY_DATASET:', import.meta.env.VITE_SANITY_DATASET)
       console.log('  VITE_SANITY_TOKEN:', import.meta.env.VITE_SANITY_TOKEN ? '[PRESENT]' : '[MISSING]')
       
-      // 統一されたAPI clientを使用
-      const { readClient, logEnvironmentInfo } = await import('./api-client')
-      logEnvironmentInfo()
-      console.log('🔍 Sanity client loaded:', !!readClient)
+      // 統一されたSanity clientを使用
+      const { default: sanityClient, logSanityStatus, testSanityConnection } = await import('./sanity-unified')
+      
+      logSanityStatus()
+      
+      // 接続テストを実行
+      const isConnected = await testSanityConnection()
+      if (!isConnected) {
+        throw new Error('Sanity connection test failed')
+      }
       
       const query = `*[_type == "post" && status == "published"] | order(publishedAt desc) {
         _id,
@@ -62,7 +68,7 @@ export class DataService {
       console.log('🔍 Executing Sanity query:', query)
       
       console.log('⏳ Sanity API呼び出し中...')
-      const result = await readClient.fetch(query)
+      const result = await sanityClient.fetch(query)
       console.log('✅ Sanity API response received!')
       console.log('🔍 Raw Sanity response:', result)
       console.log(`📊 Found ${result?.length || 0} posts`)
@@ -84,16 +90,16 @@ export class DataService {
       return { posts: publishedPosts }
     } catch (error) {
       console.error('❌ Sanity fetch error:', error)
-      console.error('❌ Error details:', {
-        message: (error as Error).message,
-        stack: (error as Error).stack,
-        name: (error as Error).name,
-        cause: (error as Error & { cause?: unknown }).cause
-      })
+      
+      // エラー分析を実行
+      const { analyzeSanityError } = await import('./sanity-unified')
+      const analysis = analyzeSanityError(error)
+      
+      console.error('❌ Error Analysis:', analysis)
+      console.error('💡 Suggestions:', analysis.suggestions)
       
       // エラー詳細を含む情報を返す
-      const apiError = error as ApiError
-      const errorMessage = `Sanity接続エラー: ${apiError.message}`
+      const errorMessage = `Sanity接続エラー (${analysis.type}): ${analysis.message}`
       console.log('🔄 Returning fallback dummy data due to Sanity error')
       console.log('🔄 User will see sample posts with error info')
       
@@ -123,7 +129,7 @@ export class DataService {
 
   static async getBlogPost(slug: string) {
     try {
-      const { readClient } = await import('./api-client')
+      const { default: sanityClient } = await import('./sanity-unified')
       const query = `*[_type == "post" && slug.current == $slug][0] {
         _id,
         _createdAt,
@@ -137,7 +143,7 @@ export class DataService {
           description
         }
       }`
-      return await readClient.fetch(query, { slug })
+      return await sanityClient.fetch(query, { slug })
     } catch (error) {
       console.error('❌ Individual post fetch error:', error)
       return null
@@ -154,13 +160,13 @@ export class DataService {
     }
     
     try {
-      const { readClient } = await import('./api-client')
+      const { default: sanityClient } = await import('./sanity-unified')
       const query = `*[_type == "category"] | order(title asc) {
         _id,
         title,
         description
       }`
-      const result = await readClient.fetch(query)
+      const result = await sanityClient.fetch(query)
       
       // Cache the result
       setCache(cacheKey, result)
@@ -168,9 +174,13 @@ export class DataService {
       return { categories: result }
     } catch (error) {
       console.error('❌ Categories fetch error:', error)
+      
+      // エラー分析
+      const { analyzeSanityError } = await import('./sanity-unified')
+      const analysis = analyzeSanityError(error)
+      
       // フォールバック: デフォルトカテゴリー
-      const apiError = error as ApiError
-      const errorMessage = `カテゴリー取得エラー: ${apiError.message}`
+      const errorMessage = `カテゴリー取得エラー (${analysis.type}): ${analysis.message}`
       return {
         categories: [
           { _id: 'ai', title: 'AI活用', description: 'AI技術の活用方法やトレンド' },

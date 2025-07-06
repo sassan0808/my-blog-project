@@ -16,9 +16,10 @@ export const sanityConfig = {
 // 読み取り専用クライアント（CDN使用）
 export const readClient = createClient({
   ...sanityConfig,
-  useCdn: true,
+  useCdn: false, // CDNを無効化してURL問題を回避
   perspective: 'published',
   stega: false, // ステガノグラフィー無効化
+  ignoreBrowserTokenWarning: true, // ブラウザでのトークン警告を無視
 })
 
 // 書き込み用クライアント（CDN無効、認証あり）
