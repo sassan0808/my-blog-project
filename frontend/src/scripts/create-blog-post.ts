@@ -1,12 +1,13 @@
 import { createBlogPost, getOrCreateAuthor, createCategory } from '../lib/sanity-write'
 import { client } from '../lib/sanity-node'
+import type { Category } from '../types/post'
 
 async function main() {
   try {
     console.log('🚀 ブログ記事を作成します...')
     
     // 実際のカテゴリーを取得
-    let categories = []
+    let categories: Category[] = []
     try {
       const query = `*[_type == "category"] | order(title asc) {
         _id,
