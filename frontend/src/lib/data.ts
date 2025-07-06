@@ -25,23 +25,24 @@ export class DataService {
   static async getBlogPosts() {
     const cacheKey = 'blog-posts'
     
-    // Check cache first
-    const cached = getCached(cacheKey)
-    if (cached) {
-      return cached as { _id: string; title: string; slug: { current: string }; publishedAt: string; categories: { _id: string; title: string; description?: string }[] }[]
-    }
+    // キャッシュを無効化（デバッグ用）
+    // const cached = getCached(cacheKey)
+    // if (cached) {
+    //   return cached as { _id: string; title: string; slug: { current: string }; publishedAt: string; categories: { _id: string; title: string; description?: string }[] }[]
+    // }
     
     try {
       // 既存のSanity client使用
       const { client } = await import('./sanity')
       console.log('🔍 Sanity client loaded:', client)
       
-      const query = `*[_type == "post" && defined(slug.current) && slug.current != ""] | order(publishedAt desc) {
+      const query = `*[_type == "post"] | order(publishedAt desc) {
         _id,
         _createdAt,
         title,
         slug,
         publishedAt,
+        status,
         "categories": categories[]->{
           _id,
           title,
@@ -54,14 +55,16 @@ export class DataService {
       console.log('🔍 Sanity API response:', result)
       console.log(`📊 Found ${result.length} posts`)
       
-      // Filter out posts with empty slugs just in case
-      const validPosts = result.filter((post: { slug?: { current: string } }) => post.slug?.current && post.slug.current !== '')
-      console.log(`📊 Valid posts after filtering: ${validPosts.length}`)
+      // publishedステータスの記事のみフィルター
+      const publishedPosts = result.filter((post: { status?: string; slug?: { current: string } }) => 
+        post.status === 'published' && post.slug?.current && post.slug.current !== ''
+      )
+      console.log(`📊 Published posts with valid slugs: ${publishedPosts.length}`)
       
       // Cache the result
-      setCache(cacheKey, validPosts)
+      setCache(cacheKey, publishedPosts)
       
-      return validPosts
+      return publishedPosts
     } catch (error) {
       console.error('❌ Sanity fetch error:', error)
       console.error('❌ Error details:', {
