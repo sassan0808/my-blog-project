@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: 'ジャーナル×AI分析アプリ',
     description: '日々の思考や感情を記録し、AIが分析してパターンや洞察を提供するジャーナリングアプリケーション。',
     longDescription: '個人の成長と自己理解を深めるためのAI搭載ジャーナリングアプリです。自然言語処理により、記録された内容から感情の変化、思考パターン、成長の軌跡を可視化し、より深い自己認識をサポートします。',
-    technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Framer Motion', 'Zustand', 'Gemini API', 'Web Speech API'],
+    technologies: ['Next.js 15.3.2 (App Router)', 'TypeScript', 'Supabase (PostgreSQL)', 'Supabase Storage', 'Supabase Auth', 'Tailwind CSS', 'Framer Motion', 'Zustand', 'Google Gemini 2.5 Flash Preview API', 'Web Speech API'],
     liveUrl: 'https://kokone-journal-git-main-sassan0808-gmailcoms-projects.vercel.app',
     featured: true,
     createdAt: '2024-10-15',
