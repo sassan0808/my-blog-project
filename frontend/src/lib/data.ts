@@ -1,5 +1,5 @@
 import type { Project, Profile } from '../types/portfolio'
-import type { Category } from '../types/post'
+import type { Category, Post } from '../types/post'
 import type { PostsResponse, CategoriesResponse, ApiError } from '../types/api'
 
 // Improved cache implementation with performance optimization
@@ -29,7 +29,7 @@ export class DataService {
     // キャッシュチェック
     const cached = getCached(cacheKey)
     if (cached) {
-      return { posts: cached as any[] }
+      return { posts: cached as Post[] }
     }
     
     try {
