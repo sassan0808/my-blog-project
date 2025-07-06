@@ -32,7 +32,7 @@ async function updateArticle() {
     try {
       await sanityClient.delete('lrNyvURZaSpXLCHkteL966')
       console.log('✅ 既存記事を削除しました')
-    } catch (error) {
+    } catch {
       console.log('ℹ️ 既存記事は既に削除済みまたは存在しません')
     }
     
