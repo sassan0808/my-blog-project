@@ -86,7 +86,7 @@ export class DataService {
         message: (error as Error).message,
         stack: (error as Error).stack,
         name: (error as Error).name,
-        cause: (error as any).cause
+        cause: (error as Error & { cause?: unknown }).cause
       })
       
       // フォールバック: 開発用ダミーデータを返す
