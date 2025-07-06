@@ -32,9 +32,17 @@ export class DataService {
     // }
     
     try {
+      console.log('🚀 DataService.getBlogPosts() 開始...')
+      
+      // 環境変数確認
+      console.log('📊 環境変数確認:')
+      console.log('  VITE_SANITY_PROJECT_ID:', import.meta.env.VITE_SANITY_PROJECT_ID)
+      console.log('  VITE_SANITY_DATASET:', import.meta.env.VITE_SANITY_DATASET)
+      console.log('  VITE_SANITY_TOKEN:', import.meta.env.VITE_SANITY_TOKEN ? '[PRESENT]' : '[MISSING]')
+      
       // 既存のSanity client使用
       const { client } = await import('./sanity')
-      console.log('🔍 Sanity client loaded:', client)
+      console.log('🔍 Sanity client loaded:', !!client)
       
       const query = `*[_type == "post"] | order(publishedAt desc) {
         _id,
@@ -51,9 +59,16 @@ export class DataService {
       }`
       console.log('🔍 Executing Sanity query:', query)
       
+      console.log('⏳ Sanity API呼び出し中...')
       const result = await client.fetch(query)
-      console.log('🔍 Sanity API response:', result)
-      console.log(`📊 Found ${result.length} posts`)
+      console.log('✅ Sanity API response received!')
+      console.log('🔍 Raw Sanity response:', result)
+      console.log(`📊 Found ${result?.length || 0} posts`)
+      
+      if (!result || !Array.isArray(result)) {
+        console.error('❌ Unexpected response format:', typeof result)
+        throw new Error('Invalid response format from Sanity')
+      }
       
       // publishedステータスの記事のみフィルター
       const publishedPosts = result.filter((post: { status?: string; slug?: { current: string } }) => 
@@ -69,11 +84,14 @@ export class DataService {
       console.error('❌ Sanity fetch error:', error)
       console.error('❌ Error details:', {
         message: (error as Error).message,
-        stack: (error as Error).stack
+        stack: (error as Error).stack,
+        name: (error as Error).name,
+        cause: (error as any).cause
       })
       
       // フォールバック: 開発用ダミーデータを返す
-      console.log('🔄 Returning fallback dummy data')
+      console.log('🔄 Returning fallback dummy data due to Sanity error')
+      console.log('🔄 User will see sample posts instead of real content')
       return [
         {
           _id: 'dummy-1',
