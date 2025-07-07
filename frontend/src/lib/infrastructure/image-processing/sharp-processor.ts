@@ -584,7 +584,7 @@ export class SharpImageProcessor implements ImageProcessor {
         errorCount
       });
 
-      return results.map((result, _index) => ({
+      return results.map((result) => ({
         success: result.status === 'fulfilled',
         media: undefined, // TODO: Convert Image/ProcessedImage to ProcessedMedia
         error: result.status === 'rejected' ? result.reason : undefined,

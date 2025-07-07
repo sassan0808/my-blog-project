@@ -1,6 +1,5 @@
 import type { 
   Media, 
-  MediaType,
   MediaMetadata, 
   ImageFormat, 
   UploadedMedia,
