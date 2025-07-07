@@ -7,6 +7,10 @@
  * npx tsx src/scripts/create-article-with-images-interactive.ts
  */
 
+// 環境変数の読み込み
+import { config as loadEnv } from 'dotenv';
+loadEnv({ path: '.env.local' });
+
 import { promises as fs } from 'fs';
 import path from 'path';
 import readline from 'readline';
@@ -449,10 +453,8 @@ class CreateArticleWithImagesCLI {
 }
 
 // CLI実行
-if (require.main === module) {
-  const cli = new CreateArticleWithImagesCLI();
-  cli.run().catch((error) => {
-    console.error('CLI execution failed:', error);
-    process.exit(1);
-  });
-}
+const cli = new CreateArticleWithImagesCLI();
+cli.run().catch((error) => {
+  console.error('CLI execution failed:', error);
+  process.exit(1);
+});
