@@ -73,7 +73,7 @@ export default function Home() {
           {/* Core Message */}
           <div className="mb-6 inline-block">
             <span className="text-sm font-mono text-neon-blue uppercase tracking-[0.2em] animate-pulse">
-              △→〇　循環型の社会へ
+              △→〇 循環型の社会へ
             </span>
           </div>
 
