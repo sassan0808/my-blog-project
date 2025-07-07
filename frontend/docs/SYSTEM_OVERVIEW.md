@@ -2,83 +2,69 @@
 
 ## 🌐 システム全体像
 
-```mermaid
-graph TB
-    subgraph "Client Side"
-        BROWSER[ブラウザ]
-        REACT[React App]
-    end
+**Excalidraw で作成:** https://excalidraw.com
 
-    subgraph "Frontend Application"
-        subgraph "Presentation Layer"
-            PAGES[Pages]
-            COMP[Components]
-            HOOKS[Custom Hooks]
-        end
+### 🎨 手書き風システム構成図
 
-        subgraph "Application Layer"
-            UC[Use Cases]
-            SERV[Services]
-        end
+この図では、**クリーンアーキテクチャ**の層構造とSanity CMSとの統合を表現しています。
 
-        subgraph "Domain Layer"
-            ENT[Entities]
-            VO[Value Objects]
-            RULES[Business Rules]
-        end
-
-        subgraph "Infrastructure Layer"
-            API[API Clients]
-            PROC[Processors]
-            ADAPT[Adapters]
-        end
-
-        subgraph "Core Layer"
-            CONFIG[Configuration]
-            ERROR[Error Handling]
-            LOG[Logging]
-            UTIL[Utilities]
-        end
-    end
-
-    subgraph "External Services"
-        subgraph "Sanity CMS"
-            STUDIO[Sanity Studio]
-            SAPI[Sanity API]
-            ASSETS[Assets Storage]
-        end
-        
-        VERCEL[Vercel Hosting]
-        GH[GitHub]
-    end
-
-    BROWSER --> REACT
-    REACT --> PAGES
-    PAGES --> COMP
-    PAGES --> HOOKS
-    HOOKS --> UC
-    UC --> SERV
-    UC --> ENT
-    SERV --> API
-    API --> SAPI
-    PROC --> ASSETS
-    
-    CONFIG --> ENV[Environment Variables]
-    ERROR --> LOG
-    
-    REACT --> VERCEL
-    GH --> VERCEL
-
-    style BROWSER fill:#60A5FA,stroke:#3B82F6,color:#fff
-    style REACT fill:#3B82F6,stroke:#1e40af,color:#fff
-    style UC fill:#8B5CF6,stroke:#6b21a8,color:#fff
-    style ENT fill:#10B981,stroke:#047857,color:#fff
-    style API fill:#F59E0B,stroke:#d97706,color:#fff
-    style CONFIG fill:#EF4444,stroke:#dc2626,color:#fff
-    style SAPI fill:#F472B6,stroke:#ec4899,color:#fff
-    style VERCEL fill:#000000,stroke:#333,color:#fff
-    style GH fill:#24292e,stroke:#000,color:#fff
 ```
+┌─────────────────────────────────────────┐
+│           Browser (Client)              │
+│  ┌─────────────────────────────────────┐ │
+│  │          React App                  │ │
+│  │                                     │ │
+│  │  ┌─────────────────────────────────┐ │ │
+│  │  │      Presentation Layer         │ │ │
+│  │  │   Pages → Components → Hooks    │ │ │
+│  │  └─────────────────────────────────┘ │ │
+│  │               ↓                     │ │
+│  │  ┌─────────────────────────────────┐ │ │
+│  │  │      Application Layer          │ │ │
+│  │  │       Use Cases ← Services      │ │ │
+│  │  └─────────────────────────────────┘ │ │
+│  │               ↓                     │ │
+│  │  ┌─────────────────────────────────┐ │ │
+│  │  │        Domain Layer             │ │ │
+│  │  │  Entities ← Value Objects       │ │ │
+│  │  └─────────────────────────────────┘ │ │
+│  │               ↓                     │ │
+│  │  ┌─────────────────────────────────┐ │ │
+│  │  │    Infrastructure Layer         │ │ │
+│  │  │   API Clients → Processors      │ │ │
+│  │  └─────────────────────────────────┘ │ │
+│  │               ↓                     │ │
+│  │  ┌─────────────────────────────────┐ │ │
+│  │  │         Core Layer              │ │ │
+│  │  │  Config → Errors → Logging      │ │ │
+│  │  └─────────────────────────────────┘ │ │
+│  └─────────────────────────────────────┘ │
+└─────────────────────────────────────────┘
+                    ↓
+┌─────────────────────────────────────────┐
+│         External Services               │
+│  ┌─────────────────────────────────────┐ │
+│  │           Sanity CMS                │ │
+│  │  ┌─────────────┐ ┌─────────────────┐│ │
+│  │  │ Sanity API  │ │ Assets Storage  ││ │
+│  │  └─────────────┘ └─────────────────┘│ │
+│  └─────────────────────────────────────┘ │
+│                                         │
+│  ┌─────────────────────────────────────┐ │
+│  │        Hosting & CI/CD              │ │
+│  │  ┌─────────────┐ ┌─────────────────┐│ │
+│  │  │   GitHub    │ │     Vercel      ││ │
+│  │  └─────────────┘ └─────────────────┘│ │
+│  └─────────────────────────────────────┘ │
+└─────────────────────────────────────────┘
+```
+
+### 🎯 アーキテクチャのポイント
+
+1. **依存性の流れ**: 外側 → 内側（クリーンアーキテクチャ）
+2. **関心事の分離**: 各レイヤーが明確な責務を持つ
+3. **外部統合**: Sanity CMS との疎結合な連携
+4. **型安全性**: TypeScript で全体を保護
 
 ## 🏛 アーキテクチャパターン
 

@@ -6,39 +6,471 @@
 
 ## 🏗 システム構成図
 
-```mermaid
-graph TB
-    subgraph "Frontend (React + TypeScript)"
-        UI[記事作成UI]
-        UC[Use Case Layer]
-        DOM[Domain Layer]
-        INFRA[Infrastructure Layer]
-        CORE[Core Layer]
-    end
+**Excalidraw で作成:** https://excalidraw.com
 
-    subgraph "External Services"
-        SANITY[Sanity CMS]
-        STORAGE[Sanity Assets Storage]
-    end
-
-    UI --> UC
-    UC --> DOM
-    UC --> INFRA
-    INFRA --> DOM
-    INFRA --> CORE
-    DOM --> CORE
-    
-    INFRA --> SANITY
-    SANITY --> STORAGE
-
-    style UI fill:#3B82F6,stroke:#1e40af,color:#fff
-    style UC fill:#8B5CF6,stroke:#6b21a8,color:#fff
-    style DOM fill:#10B981,stroke:#047857,color:#fff
-    style INFRA fill:#F59E0B,stroke:#d97706,color:#fff
-    style CORE fill:#EF4444,stroke:#dc2626,color:#fff
-    style SANITY fill:#F472B6,stroke:#ec4899,color:#fff
-    style STORAGE fill:#6B7280,stroke:#4b5563,color:#fff
+```json
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "ui-layer",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 100,
+      "y": 50,
+      "strokeColor": "#1e40af",
+      "backgroundColor": "#3B82F6",
+      "width": 200,
+      "height": 60,
+      "seed": 1
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "ui-text",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 150,
+      "y": 70,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "width": 100,
+      "height": 20,
+      "seed": 1,
+      "text": "記事作成UI",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "usecase-layer",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 100,
+      "y": 150,
+      "strokeColor": "#6b21a8",
+      "backgroundColor": "#8B5CF6",
+      "width": 200,
+      "height": 60,
+      "seed": 1
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "usecase-text",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 140,
+      "y": 170,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "width": 120,
+      "height": 20,
+      "seed": 1,
+      "text": "Use Case Layer",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "domain-layer",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 100,
+      "y": 250,
+      "strokeColor": "#047857",
+      "backgroundColor": "#10B981",
+      "width": 200,
+      "height": 60,
+      "seed": 1
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "domain-text",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 140,
+      "y": 270,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "width": 120,
+      "height": 20,
+      "seed": 1,
+      "text": "Domain Layer",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "infra-layer",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 350,
+      "y": 200,
+      "strokeColor": "#d97706",
+      "backgroundColor": "#F59E0B",
+      "width": 200,
+      "height": 100,
+      "seed": 1
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "infra-text",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 380,
+      "y": 220,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "width": 140,
+      "height": 60,
+      "seed": 1,
+      "text": "Infrastructure\nLayer",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "core-layer",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 100,
+      "y": 350,
+      "strokeColor": "#dc2626",
+      "backgroundColor": "#EF4444",
+      "width": 200,
+      "height": 60,
+      "seed": 1
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "core-text",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 150,
+      "y": 370,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "width": 100,
+      "height": 20,
+      "seed": 1,
+      "text": "Core Layer",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "sanity-cms",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 600,
+      "y": 150,
+      "strokeColor": "#ec4899",
+      "backgroundColor": "#F472B6",
+      "width": 150,
+      "height": 80,
+      "seed": 1
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "sanity-text",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 640,
+      "y": 180,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "width": 70,
+      "height": 20,
+      "seed": 1,
+      "text": "Sanity CMS",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "rectangle",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "storage",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 600,
+      "y": 280,
+      "strokeColor": "#4b5563",
+      "backgroundColor": "#6B7280",
+      "width": 150,
+      "height": 60,
+      "seed": 1
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "storage-text",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 620,
+      "y": 300,
+      "strokeColor": "#ffffff",
+      "backgroundColor": "transparent",
+      "width": 110,
+      "height": 20,
+      "seed": 1,
+      "text": "Assets Storage",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle"
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "arrow-ui-usecase",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 200,
+      "y": 110,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "transparent",
+      "width": 0,
+      "height": 40,
+      "seed": 1,
+      "startBinding": null,
+      "endBinding": null,
+      "points": [[0, 0], [0, 40]],
+      "lastCommittedPoint": [0, 40]
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "arrow-usecase-domain",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 200,
+      "y": 210,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "transparent",
+      "width": 0,
+      "height": 40,
+      "seed": 1,
+      "startBinding": null,
+      "endBinding": null,
+      "points": [[0, 0], [0, 40]],
+      "lastCommittedPoint": [0, 40]
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "arrow-usecase-infra",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 300,
+      "y": 180,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "transparent",
+      "width": 50,
+      "height": 40,
+      "seed": 1,
+      "startBinding": null,
+      "endBinding": null,
+      "points": [[0, 0], [50, 40]],
+      "lastCommittedPoint": [50, 40]
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "arrow-infra-sanity",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 550,
+      "y": 220,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "transparent",
+      "width": 50,
+      "height": -30,
+      "seed": 1,
+      "startBinding": null,
+      "endBinding": null,
+      "points": [[0, 0], [50, -30]],
+      "lastCommittedPoint": [50, -30]
+    },
+    {
+      "type": "arrow",
+      "version": 1,
+      "versionNonce": 1,
+      "isDeleted": false,
+      "id": "arrow-sanity-storage",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": 675,
+      "y": 230,
+      "strokeColor": "#1f2937",
+      "backgroundColor": "transparent",
+      "width": 0,
+      "height": 50,
+      "seed": 1,
+      "startBinding": null,
+      "endBinding": null,
+      "points": [[0, 0], [0, 50]],
+      "lastCommittedPoint": [0, 50]
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
 ```
+
+**👆 この JSON を https://excalidraw.com にコピペして開いてください！**
+
+### 📝 使い方
+1. https://excalidraw.com を開く
+2. 左上の「Open」→「Load from clipboard」
+3. 上記JSONをペースト
+4. 手書き風の図が表示されます！
+
+### ✨ 図の特徴
+- 🎨 手書き風でおしゃれ
+- 🌈 レイヤー別に色分け（青→紫→緑→オレンジ→赤）
+- ➡️ 依存関係を矢印で表現
+- 📱 クリーンアーキテクチャの構造を視覚化
 
 ## 📁 レイヤー別構成
 
