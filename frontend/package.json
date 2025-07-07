@@ -16,16 +16,19 @@
     "test-system": "tsx src/scripts/test-optimized-system.ts",
     "create-post": "tsx src/scripts/create-blog-post.ts",
     "fix-slugs": "tsx src/scripts/fix-blog-slugs.ts",
-    "test-sanity": "tsx src/scripts/test-sanity.ts"
+    "test-sanity": "tsx src/scripts/test-sanity.ts",
+    "create-article-with-images": "tsx src/scripts/create-article-with-images-interactive.ts"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.1",
     "@portabletext/types": "^2.0.13",
     "@sanity/client": "^7.6.0",
     "@types/uuid": "^10.0.0",
+    "file-type": "^21.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.3",
+    "sharp": "^0.34.2",
     "uuid": "^11.1.0"
   },
   "devDependencies": {

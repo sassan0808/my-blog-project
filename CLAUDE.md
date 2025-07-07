@@ -37,6 +37,48 @@ Sanity CMSを使用したブログシステム
 - Hosting: Vercel
 - Domain: https://my-blog-project-pi.vercel.app
 
+## 画像付き記事作成システム
+
+### 🎨 新機能：自動画像アップロード対応
+画像を含む記事を簡単に作成できる新しいシステムを実装しました。
+
+#### 主な機能
+- **自動画像最適化**: アップロード時に画像を自動で最適化
+- **画像解析**: AIによる画像内容の分析とalt text自動生成
+- **一括アップロード**: 複数画像の並列処理
+- **統合ワークフロー**: 画像アップロードから記事作成まで一元化
+
+#### 使用方法
+```bash
+# 画像付き記事作成（インタラクティブ）
+cd frontend && npm run create-article-with-images
+```
+
+#### システム構成
+```
+Core Layer
+├── エラーハンドリング: 統一されたエラー管理
+├── ロギング: 詳細な処理ログ
+└── 設定管理: 環境変数ベースの設定
+
+Domain Layer
+├── 記事エンティティ: 記事の構造とビジネスロジック
+└── 画像エンティティ: 画像処理とメタデータ管理
+
+Infrastructure Layer
+├── Sharp画像処理: 高性能な画像変換・最適化
+└── Sanity統合: CMS連携とアセット管理
+
+Application Layer
+└── 画像付き記事作成: 全体オーケストレーション
+```
+
+#### 画像処理の特徴
+- **対応フォーマット**: JPEG, PNG, WebP, GIF
+- **自動リサイズ**: 最大1920x1080に自動調整
+- **圧縮最適化**: 品質85%での高効率圧縮
+- **メタデータ抽出**: 画像情報の自動解析
+
 ## よく使うコマンド
 ```bash
 # フロントエンド開発
@@ -44,6 +86,12 @@ cd frontend && npm run dev
 
 # Sanity Studio起動
 cd studio && npm run dev
+
+# 従来の記事作成
+cd frontend && npm run create-post
+
+# 🆕 画像付き記事作成
+cd frontend && npm run create-article-with-images
 
 # ビルド&デプロイ
 git add . && git commit -m "メッセージ" && git push
