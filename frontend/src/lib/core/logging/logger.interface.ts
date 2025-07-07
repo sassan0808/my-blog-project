@@ -1,14 +1,19 @@
 import { BaseError } from '../errors/base-error';
 
 /**
- * ログレベル
+ * ログレベル定数
  */
-export enum LogLevel {
-  DEBUG = 0,
-  INFO = 1,
-  WARN = 2,
-  ERROR = 3
-}
+export const LogLevels = {
+  DEBUG: 0,
+  INFO: 1,
+  WARN: 2,
+  ERROR: 3
+} as const;
+
+/**
+ * ログレベル型
+ */
+export type LogLevel = typeof LogLevels[keyof typeof LogLevels];
 
 /**
  * ログエントリーのメタデータ

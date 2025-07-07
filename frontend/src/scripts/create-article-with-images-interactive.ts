@@ -12,14 +12,16 @@ import path from 'path';
 import readline from 'readline';
 import { 
   CreateArticleWithImagesUseCase,
-  CreateArticleRequest,
   createArticleWithImagesUseCase
 } from '../lib/application/use-cases/create-article-with-images';
-import { ArticleCategory } from '../lib/domain/entities/article';
-import { ImageReference, ImagePlacement } from '../lib/domain/entities/media.interface';
+import type { CreateArticleRequest } from '../lib/application/use-cases/create-article-with-images';
+import type { ArticleCategory } from '../lib/domain/entities/article';
+import { ArticleCategories } from '../lib/domain/entities/article';
+import type { ImageReference } from '../lib/domain/entities/media.interface';
+import { ImagePlacements } from '../lib/domain/entities/media.interface';
 import { getDefaultConfigManager } from '../lib/core/config/environment-config';
 import { createDefaultLogger } from '../lib/core/logging/console-logger';
-import { Logger } from '../lib/core/logging/logger.interface';
+import type { Logger } from '../lib/core/logging/logger.interface';
 
 /**
  * CLI の状態管理
@@ -154,13 +156,13 @@ class CreateArticleWithImagesCLI {
       
       switch (choice) {
         case '1':
-          this.state.category = ArticleCategory.AI_UTILIZATION;
+          this.state.category = ArticleCategories.AI_UTILIZATION;
           break;
         case '2':
-          this.state.category = ArticleCategory.ORGANIZATION_DEVELOPMENT;
+          this.state.category = ArticleCategories.ORGANIZATION_DEVELOPMENT;
           break;
         case '3':
-          this.state.category = ArticleCategory.WELL_BEING;
+          this.state.category = ArticleCategories.WELL_BEING;
           break;
         default:
           console.log('❌ 無効な選択です。1-3の数字を入力してください。');
@@ -201,7 +203,7 @@ class CreateArticleWithImagesCLI {
           filePath: imagePath,
           altText: altText || undefined,
           caption: caption || undefined,
-          placement: ImagePlacement.FIGURE
+          placement: ImagePlacements.FIGURE
         };
 
         this.state.images.push(imageRef);

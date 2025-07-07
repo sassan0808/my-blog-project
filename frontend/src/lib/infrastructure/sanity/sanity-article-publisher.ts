@@ -1,18 +1,20 @@
 import { createClient, SanityClient } from '@sanity/client';
-import { 
+import type { 
   ArticlePublisher,
   SanityPost
 } from './sanity-client.interface';
 import { SanityImageUploader } from './sanity-image-uploader';
-import { SanityConfig } from '../../core/config/config.interface';
-import { Article, ArticleCategory } from '../../domain/entities/article';
+import type { SanityConfig } from '../../core/config/config.interface';
+import { Article } from '../../domain/entities/article';
+import type { ArticleCategory } from '../../domain/entities/article';
+import { ArticleCategories } from '../../domain/entities/article';
 import { Image } from '../../domain/entities/image';
-import { UploadedMedia } from '../../domain/entities/media.interface';
+import type { UploadedMedia } from '../../domain/entities/media.interface';
 import { 
   SanityDocumentError,
   SanityConfigurationError
 } from '../../core/errors/sanity-error';
-import { Logger } from '../../core/logging/logger.interface';
+import type { Logger } from '../../core/logging/logger.interface';
 import { createDefaultLogger } from '../../core/logging/console-logger';
 
 /**
@@ -36,7 +38,7 @@ export class SanityArticlePublisher implements ArticlePublisher {
       token: config.token,
       useCdn: config.useCdn,
       timeout: config.timeout,
-      retryDelay: config.retryDelay,
+      retryDelay: (attemptNumber) => config.retryDelay * attemptNumber,
       maxRetries: config.retryAttempts
     });
 
@@ -388,9 +390,9 @@ export class SanityArticlePublisher implements ArticlePublisher {
   private async getCategoryReference(category: ArticleCategory): Promise<string> {
     // カテゴリーマッピング
     const categoryMapping: Record<ArticleCategory, string> = {
-      [ArticleCategory.AI_UTILIZATION]: 'category-ai-utilization',
-      [ArticleCategory.ORGANIZATION_DEVELOPMENT]: 'category-organization-development',
-      [ArticleCategory.WELL_BEING]: 'category-well-being'
+      [ArticleCategories.AI_UTILIZATION]: 'category-ai-utilization',
+      [ArticleCategories.ORGANIZATION_DEVELOPMENT]: 'category-organization-development',
+      [ArticleCategories.WELL_BEING]: 'category-well-being'
     };
 
     const categoryId = categoryMapping[category];
@@ -465,18 +467,18 @@ export class SanityArticlePublisher implements ArticlePublisher {
 
   private getCategoryColor(category: ArticleCategory): string {
     const colorMapping: Record<ArticleCategory, string> = {
-      [ArticleCategory.AI_UTILIZATION]: 'blue',
-      [ArticleCategory.ORGANIZATION_DEVELOPMENT]: 'green',
-      [ArticleCategory.WELL_BEING]: 'purple'
+      [ArticleCategories.AI_UTILIZATION]: 'blue',
+      [ArticleCategories.ORGANIZATION_DEVELOPMENT]: 'green',
+      [ArticleCategories.WELL_BEING]: 'purple'
     };
     return colorMapping[category] || 'gray';
   }
 
   private getCategoryOrder(category: ArticleCategory): number {
     const orderMapping: Record<ArticleCategory, number> = {
-      [ArticleCategory.AI_UTILIZATION]: 1,
-      [ArticleCategory.ORGANIZATION_DEVELOPMENT]: 2,
-      [ArticleCategory.WELL_BEING]: 3
+      [ArticleCategories.AI_UTILIZATION]: 1,
+      [ArticleCategories.ORGANIZATION_DEVELOPMENT]: 2,
+      [ArticleCategories.WELL_BEING]: 3
     };
     return orderMapping[category] || 99;
   }

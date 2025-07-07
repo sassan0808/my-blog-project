@@ -1,5 +1,5 @@
-import type { Logger, LogMetadata, LoggerConfig, PerformanceLogger } from './logger.interface';
-import { LogLevel } from './logger.interface';
+import type { Logger, LogMetadata, LoggerConfig, PerformanceLogger, LogLevel } from './logger.interface';
+import { LogLevels } from './logger.interface';
 import { BaseError } from '../errors/base-error';
 
 /**
@@ -35,36 +35,36 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
    * ログレベルの文字列表現
    */
   private static readonly LEVEL_NAMES = {
-    [LogLevel.DEBUG]: 'DEBUG',
-    [LogLevel.INFO]: 'INFO',
-    [LogLevel.WARN]: 'WARN',
-    [LogLevel.ERROR]: 'ERROR'
+    [LogLevels.DEBUG]: 'DEBUG',
+    [LogLevels.INFO]: 'INFO',
+    [LogLevels.WARN]: 'WARN',
+    [LogLevels.ERROR]: 'ERROR'
   };
 
   /**
    * ログレベルの絵文字
    */
   private static readonly LEVEL_EMOJIS = {
-    [LogLevel.DEBUG]: '🔍',
-    [LogLevel.INFO]: '📋',
-    [LogLevel.WARN]: '⚠️',
-    [LogLevel.ERROR]: '🚨'
+    [LogLevels.DEBUG]: '🔍',
+    [LogLevels.INFO]: '📋',
+    [LogLevels.WARN]: '⚠️',
+    [LogLevels.ERROR]: '🚨'
   };
 
   debug(message: string, context?: string, data?: Record<string, unknown>): void {
-    this.log(LogLevel.DEBUG, message, context, data);
+    this.log(LogLevels.DEBUG, message, context, data);
   }
 
   info(message: string, context?: string, data?: Record<string, unknown>): void {
-    this.log(LogLevel.INFO, message, context, data);
+    this.log(LogLevels.INFO, message, context, data);
   }
 
   warn(message: string, context?: string, data?: Record<string, unknown>): void {
-    this.log(LogLevel.WARN, message, context, data);
+    this.log(LogLevels.WARN, message, context, data);
   }
 
   error(message: string, error?: Error | BaseError, context?: string, data?: Record<string, unknown>): void {
-    this.log(LogLevel.ERROR, message, context, data, error);
+    this.log(LogLevels.ERROR, message, context, data, error);
   }
 
   private log(level: LogLevel, message: string, context?: string, data?: Record<string, unknown>, error?: Error | BaseError): void {
@@ -87,7 +87,7 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
     const formattedMessage = this.formatMessage(entry);
     
     // 出力先の判定
-    const output = level >= LogLevel.ERROR ? console.error : console.log;
+    const output = level >= LogLevels.ERROR ? console.error : console.log;
     output(formattedMessage);
 
     // エラーの場合はスタックトレースも出力
@@ -148,10 +148,10 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
     }
 
     switch (level) {
-      case LogLevel.DEBUG: return ConsoleLogger.COLORS.DEBUG;
-      case LogLevel.INFO: return ConsoleLogger.COLORS.INFO;
-      case LogLevel.WARN: return ConsoleLogger.COLORS.WARN;
-      case LogLevel.ERROR: return ConsoleLogger.COLORS.ERROR;
+      case LogLevels.DEBUG: return ConsoleLogger.COLORS.DEBUG;
+      case LogLevels.INFO: return ConsoleLogger.COLORS.INFO;
+      case LogLevels.WARN: return ConsoleLogger.COLORS.WARN;
+      case LogLevels.ERROR: return ConsoleLogger.COLORS.ERROR;
       default: return '';
     }
   }
@@ -237,12 +237,12 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
  * デフォルトのロガー設定
  */
 export const DEFAULT_LOGGER_CONFIG: LoggerConfig = {
-  level: LogLevel.INFO,
+  level: LogLevels.INFO,
   destinations: [
     {
       name: 'console',
       enabled: true,
-      minLevel: LogLevel.DEBUG,
+      minLevel: LogLevels.DEBUG,
       format: 'text'
     }
   ],

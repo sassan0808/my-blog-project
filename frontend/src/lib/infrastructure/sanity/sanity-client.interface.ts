@@ -1,7 +1,7 @@
-import { SanityConfig } from '../../core/config/config.interface';
+import type { SanityConfig } from '../../core/config/config.interface';
 import { Image } from '../../domain/entities/image';
 import { Article } from '../../domain/entities/article';
-import { UploadedMedia } from '../../domain/entities/media.interface';
+import type { UploadedMedia } from '../../domain/entities/media.interface';
 
 /**
  * Sanity アセットの情報

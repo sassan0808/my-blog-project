@@ -1,6 +1,6 @@
-import { 
+import type { 
   Media, 
-  MediaType, 
+  MediaType,
   MediaMetadata, 
   ImageFormat, 
   UploadedMedia,
@@ -8,13 +8,14 @@ import {
   ImagePlacement,
   OptimizationOptions
 } from './media.interface';
+import { MediaTypes, ImageFormats, ImagePlacements } from './media.interface';
 
 /**
  * 画像エンティティ
  */
 export class Image implements Media {
   public readonly id: string;
-  public readonly type = MediaType.IMAGE;
+  public readonly type = MediaTypes.IMAGE;
   public readonly fileName: string;
   public readonly fileSize: number;
   public readonly mimeType: string;
@@ -106,15 +107,15 @@ export class Image implements Media {
   getFormat(): ImageFormat {
     switch (this.mimeType) {
       case 'image/jpeg':
-        return ImageFormat.JPEG;
+        return ImageFormats.JPEG;
       case 'image/png':
-        return ImageFormat.PNG;
+        return ImageFormats.PNG;
       case 'image/webp':
-        return ImageFormat.WEBP;
+        return ImageFormats.WEBP;
       case 'image/gif':
-        return ImageFormat.GIF;
+        return ImageFormats.GIF;
       case 'image/svg+xml':
-        return ImageFormat.SVG;
+        return ImageFormats.SVG;
       default:
         throw new Error(`Unsupported image format: ${this.mimeType}`);
     }
@@ -164,14 +165,14 @@ export class Image implements Media {
    * 透明度を持つかどうか
    */
   hasTransparency(): boolean {
-    return this.metadata.hasAlpha || this.getFormat() === ImageFormat.PNG;
+    return this.metadata.hasAlpha || this.getFormat() === ImageFormats.PNG;
   }
 
   /**
    * アニメーションGIFかどうか
    */
   isAnimated(): boolean {
-    return this.getFormat() === ImageFormat.GIF && this.metadata.format === 'gif';
+    return this.getFormat() === ImageFormats.GIF && this.metadata.format === 'gif';
   }
 
   /**
@@ -202,7 +203,7 @@ export class Image implements Media {
     if (dimensions && (dimensions.width > 2048 || dimensions.height > 2048)) return true;
     
     // PNG で透明度を使用していない場合はJPEGへの変換推奨
-    if (this.getFormat() === ImageFormat.PNG && !this.hasTransparency()) return true;
+    if (this.getFormat() === ImageFormats.PNG && !this.hasTransparency()) return true;
     
     return false;
   }
@@ -216,18 +217,18 @@ export class Image implements Media {
     }
 
     const dimensions = this.getDimensions();
-    if (!dimensions) return ImagePlacement.INLINE;
+    if (!dimensions) return ImagePlacements.INLINE;
 
     // アスペクト比に基づく推奨
     if (this.isLandscape() && dimensions.width > 1200) {
-      return ImagePlacement.HERO;
+      return ImagePlacements.HERO;
     }
     
     if (this.isSquare() && dimensions.width < 400) {
-      return ImagePlacement.THUMBNAIL;
+      return ImagePlacements.THUMBNAIL;
     }
     
-    return ImagePlacement.FIGURE;
+    return ImagePlacements.FIGURE;
   }
 
   /**

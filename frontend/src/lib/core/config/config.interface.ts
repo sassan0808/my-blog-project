@@ -1,4 +1,4 @@
-import { LogLevel } from '../logging/logger.interface';
+import type { LogLevel } from '../logging/logger.interface';
 
 /**
  * Sanity設定

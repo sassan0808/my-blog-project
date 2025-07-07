@@ -1,23 +1,27 @@
 /**
  * メディアタイプ
  */
-export enum MediaType {
-  IMAGE = 'image',
-  VIDEO = 'video',
-  AUDIO = 'audio',
-  DOCUMENT = 'document'
-}
+export const MediaTypes = {
+  IMAGE: 'image',
+  VIDEO: 'video',
+  AUDIO: 'audio',
+  DOCUMENT: 'document'
+} as const;
+
+export type MediaType = typeof MediaTypes[keyof typeof MediaTypes];
 
 /**
  * メディアフォーマット
  */
-export enum ImageFormat {
-  JPEG = 'jpeg',
-  PNG = 'png',
-  WEBP = 'webp',
-  GIF = 'gif',
-  SVG = 'svg'
-}
+export const ImageFormats = {
+  JPEG: 'jpeg',
+  PNG: 'png',
+  WEBP: 'webp',
+  GIF: 'gif',
+  SVG: 'svg'
+} as const;
+
+export type ImageFormat = typeof ImageFormats[keyof typeof ImageFormats];
 
 /**
  * 画像の最適化設定
@@ -143,13 +147,15 @@ export interface ImageReference {
 /**
  * 画像の配置方法
  */
-export enum ImagePlacement {
-  INLINE = 'inline',
-  FIGURE = 'figure',
-  HERO = 'hero',
-  THUMBNAIL = 'thumbnail',
-  BACKGROUND = 'background'
-}
+export const ImagePlacements = {
+  INLINE: 'inline',
+  FIGURE: 'figure',
+  HERO: 'hero',
+  THUMBNAIL: 'thumbnail',
+  BACKGROUND: 'background'
+} as const;
+
+export type ImagePlacement = typeof ImagePlacements[keyof typeof ImagePlacements];
 
 /**
  * 画像の配置戦略

@@ -12,10 +12,12 @@ import type {
 import type { 
   MediaMetadata, 
   MediaValidationResult, 
+  MediaProcessingResult,
   OptimizationOptions,
   ImageAnalysis,
   ImagePlacement
 } from '../../domain/entities/media.interface';
+import { ImagePlacements } from '../../domain/entities/media.interface';
 import { Image, ProcessedImage } from '../../domain/entities/image';
 import { 
   ImageValidationError, 
@@ -560,7 +562,7 @@ export class SharpImageProcessor implements ImageProcessor {
   async processBatch(images: Array<{
     image: Image;
     options: ImageProcessingOptions;
-  }>): Promise<Array<Record<string, unknown>>> {
+  }>): Promise<MediaProcessingResult[]> {
     const stopTimer = this.logger.startTimer('processBatch');
 
     try {
@@ -582,11 +584,18 @@ export class SharpImageProcessor implements ImageProcessor {
         errorCount
       });
 
-      return results.map((result, index) => ({
+      return results.map((result, _index) => ({
         success: result.status === 'fulfilled',
-        result: result.status === 'fulfilled' ? result.value : null,
-        error: result.status === 'rejected' ? result.reason : null,
-        originalImage: images[index].image
+        media: undefined, // TODO: Convert Image/ProcessedImage to ProcessedMedia
+        error: result.status === 'rejected' ? result.reason : undefined,
+        warnings: [],
+        processingSteps: ['optimization'],
+        performance: {
+          totalTime: 0,
+          validationTime: 0,
+          processingTime: 0,
+          optimizationTime: 0
+        }
       }));
     } catch (error) {
       this.logger.error('Batch processing failed', error as Error, 'processBatch');
@@ -665,16 +674,16 @@ export class SharpImageProcessor implements ImageProcessor {
 
   private suggestPlacement(metadata: MediaMetadata): ImagePlacement {
     const dimensions = metadata.dimensions;
-    if (!dimensions) return ImagePlacement.INLINE;
+    if (!dimensions) return ImagePlacements.INLINE;
 
     const aspectRatio = dimensions.width / dimensions.height;
     
     if (aspectRatio > 1.5 && dimensions.width > 1200) {
-      return ImagePlacement.HERO;
+      return ImagePlacements.HERO;
     } else if (aspectRatio < 0.8 && dimensions.width < 400) {
-      return ImagePlacement.THUMBNAIL;
+      return ImagePlacements.THUMBNAIL;
     } else {
-      return ImagePlacement.FIGURE;
+      return ImagePlacements.FIGURE;
     }
   }
 }

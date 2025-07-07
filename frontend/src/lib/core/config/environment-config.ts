@@ -7,7 +7,8 @@ import type {
   ValidationWarning,
   EnvironmentVariables 
 } from './config.interface';
-import { LogLevel } from '../logging/logger.interface';
+import type { LogLevel } from '../logging/logger.interface';
+import { LogLevels } from '../logging/logger.interface';
 
 /**
  * デフォルト設定値
@@ -52,7 +53,7 @@ const DEFAULT_CONFIG: ApplicationConfig = {
     }
   },
   logging: {
-    level: LogLevel.INFO,
+    level: LogLevels.INFO,
     enableConsole: true,
     enableFile: false,
     filePath: './logs/image-upload.log',
@@ -93,7 +94,7 @@ export class EnvironmentConfigProvider implements ConfigProvider {
   private envVars: Partial<EnvironmentVariables>;
 
   constructor(envVars?: Partial<EnvironmentVariables>) {
-    this.envVars = envVars || process.env;
+    this.envVars = envVars || (process.env as Partial<EnvironmentVariables>);
   }
 
   async load(): Promise<ApplicationConfig> {
@@ -284,10 +285,10 @@ export class EnvironmentConfigProvider implements ConfigProvider {
     if (!value) return undefined;
     
     switch (value.toLowerCase()) {
-      case 'debug': return LogLevel.DEBUG;
-      case 'info': return LogLevel.INFO;
-      case 'warn': return LogLevel.WARN;
-      case 'error': return LogLevel.ERROR;
+      case 'debug': return LogLevels.DEBUG;
+      case 'info': return LogLevels.INFO;
+      case 'warn': return LogLevels.WARN;
+      case 'error': return LogLevels.ERROR;
       default: return undefined;
     }
   }

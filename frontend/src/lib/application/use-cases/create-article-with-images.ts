@@ -5,9 +5,9 @@ import type {
   AnalysisOptions
 } from '../../infrastructure/image-processing/image-processor.interface';
 import { SharpImageProcessor } from '../../infrastructure/image-processing/sharp-processor';
-import { SanityImageUploader } from '../../infrastructure/sanity/sanity-image-uploader';
 import { SanityArticlePublisher } from '../../infrastructure/sanity/sanity-article-publisher';
-import { ArticleBuilder, ArticleCategory } from '../../domain/entities/article';
+import { ArticleBuilder } from '../../domain/entities/article';
+import type { ArticleCategory, PortableTextBlock, PortableTextSpan } from '../../domain/entities/article';
 import { Image } from '../../domain/entities/image';
 import type { 
   ImageReference, 
@@ -75,7 +75,6 @@ export interface CreateArticleResult {
  */
 export class CreateArticleWithImagesUseCase {
   private imageProcessor: ImageProcessor;
-  private imageUploader: SanityImageUploader;
   private articlePublisher: SanityArticlePublisher;
   private config: ApplicationConfig;
   private logger: Logger;
@@ -83,7 +82,6 @@ export class CreateArticleWithImagesUseCase {
   constructor(
     config: ApplicationConfig,
     imageProcessor?: ImageProcessor,
-    imageUploader?: SanityImageUploader,
     articlePublisher?: SanityArticlePublisher,
     logger?: Logger
   ) {
@@ -91,7 +89,6 @@ export class CreateArticleWithImagesUseCase {
     this.logger = logger || createDefaultLogger().child('CreateArticleWithImages');
     
     this.imageProcessor = imageProcessor || new SharpImageProcessor(this.logger);
-    this.imageUploader = imageUploader || new SanityImageUploader(config.sanity, this.logger);
     this.articlePublisher = articlePublisher || new SanityArticlePublisher(config.sanity, this.logger);
   }
 
@@ -383,8 +380,9 @@ export class CreateArticleWithImagesUseCase {
                 image.altText = analysis.suggestedAltText;
               }
             } catch (analysisError) {
-              this.logger.warn('Image analysis failed', analysisError as Error, 'processImages', {
-                imagePath: imageRef.filePath
+              this.logger.warn('Image analysis failed', 'processImages', {
+                imagePath: imageRef.filePath,
+                error: (analysisError as Error).message
               });
               // 解析の失敗は処理を停止しない
             }
@@ -416,10 +414,10 @@ export class CreateArticleWithImagesUseCase {
     }
   }
 
-  private parseContentToPortableText(content: string): Array<Record<string, unknown>> {
+  private parseContentToPortableText(content: string): PortableTextBlock[] {
     // 基本的なMarkdown to PortableText変換
     const lines = content.split('\n');
-    const blocks: Array<Record<string, unknown>> = [];
+    const blocks: PortableTextBlock[] = [];
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
@@ -430,28 +428,28 @@ export class CreateArticleWithImagesUseCase {
           _type: 'block',
           _key: `block_${i}`,
           style: 'h1',
-          children: [{ _type: 'span', _key: `span_${i}`, text: line.substring(2) }]
+          children: [{ _type: 'span', _key: `span_${i}`, text: line.substring(2) } as PortableTextSpan]
         });
       } else if (line.startsWith('## ')) {
         blocks.push({
           _type: 'block',
           _key: `block_${i}`,
           style: 'h2',
-          children: [{ _type: 'span', _key: `span_${i}`, text: line.substring(3) }]
+          children: [{ _type: 'span', _key: `span_${i}`, text: line.substring(3) } as PortableTextSpan]
         });
       } else if (line.startsWith('### ')) {
         blocks.push({
           _type: 'block',
           _key: `block_${i}`,
           style: 'h3',
-          children: [{ _type: 'span', _key: `span_${i}`, text: line.substring(4) }]
+          children: [{ _type: 'span', _key: `span_${i}`, text: line.substring(4) } as PortableTextSpan]
         });
       } else {
         blocks.push({
           _type: 'block',
           _key: `block_${i}`,
           style: 'normal',
-          children: [{ _type: 'span', _key: `span_${i}`, text: line }]
+          children: [{ _type: 'span', _key: `span_${i}`, text: line } as PortableTextSpan]
         });
       }
     }
@@ -493,7 +491,7 @@ export class CreateArticleWithImagesUseCase {
 
       let processingStats;
       if (processedImage && 'originalImage' in processedImage) {
-        const processed = processedImage as { 
+        const processed = processedImage as unknown as { 
           originalImage: Image; 
           fileSize: number; 
           sizeDifference: { compressionRatio: number }; 
@@ -520,5 +518,5 @@ export class CreateArticleWithImagesUseCase {
  * ファクトリー関数
  */
 export function createArticleWithImagesUseCase(config: ApplicationConfig, logger?: Logger): CreateArticleWithImagesUseCase {
-  return new CreateArticleWithImagesUseCase(config, undefined, undefined, undefined, logger);
+  return new CreateArticleWithImagesUseCase(config, undefined, undefined, logger);
 }

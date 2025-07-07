@@ -38,7 +38,7 @@ export class SanityImageUploader implements ImageUploader {
       token: config.token,
       useCdn: config.useCdn,
       timeout: config.timeout,
-      retryDelay: config.retryDelay,
+      retryDelay: (attemptNumber) => config.retryDelay * attemptNumber,
       maxRetries: config.retryAttempts
     });
 
@@ -257,8 +257,9 @@ export class SanityImageUploader implements ImageUploader {
         await this.deleteImage(oldAssetId);
         this.logger.debug('Old asset deleted successfully', 'replaceImage', { oldAssetId });
       } catch (deleteError) {
-        this.logger.warn('Failed to delete old asset', deleteError as Error, 'replaceImage', {
-          oldAssetId
+        this.logger.warn('Failed to delete old asset', 'replaceImage', {
+          oldAssetId,
+          error: (deleteError as Error).message
         });
         // 削除に失敗しても新しいアップロードは成功しているので続行
       }

@@ -1,23 +1,28 @@
 import { Image } from './image';
-import { ImagePlacement } from './media.interface';
+import type { ImagePlacement } from './media.interface';
+import { ImagePlacements } from './media.interface';
 
 /**
  * 記事のステータス
  */
-export enum ArticleStatus {
-  DRAFT = 'draft',
-  PUBLISHED = 'published',
-  ARCHIVED = 'archived'
-}
+export const ArticleStatuses = {
+  DRAFT: 'draft',
+  PUBLISHED: 'published',
+  ARCHIVED: 'archived'
+} as const;
+
+export type ArticleStatus = typeof ArticleStatuses[keyof typeof ArticleStatuses];
 
 /**
  * 記事のカテゴリー
  */
-export enum ArticleCategory {
-  AI_UTILIZATION = 'AI活用',
-  ORGANIZATION_DEVELOPMENT = '組織開発',
-  WELL_BEING = 'Well-being'
-}
+export const ArticleCategories = {
+  AI_UTILIZATION: 'AI活用',
+  ORGANIZATION_DEVELOPMENT: '組織開発',
+  WELL_BEING: 'Well-being'
+} as const;
+
+export type ArticleCategory = typeof ArticleCategories[keyof typeof ArticleCategories];
 
 /**
  * PortableTextブロック
@@ -129,7 +134,7 @@ export class Article {
     this.slug = params.slug || Article.generateSlug(params.title);
     this.excerpt = params.excerpt || '';
     this.content = params.content || [];
-    this.status = params.status || ArticleStatus.DRAFT;
+    this.status = params.status || ArticleStatuses.DRAFT;
     this.category = params.category;
     this.tags = params.tags || [];
     this.images = params.images || [];
@@ -201,7 +206,7 @@ export class Article {
   /**
    * コンテンツに画像を挿入
    */
-  insertImageInContent(image: Image, position: number, _placement: ImagePlacement = ImagePlacement.FIGURE): void {
+  insertImageInContent(image: Image, position: number, _placement: ImagePlacement = ImagePlacements.FIGURE): void {
     const imageBlock: ImageBlock = {
       _type: 'image',
       _key: `image_${image.id}`,
@@ -222,7 +227,7 @@ export class Article {
    * 記事を公開
    */
   publish(): void {
-    this.status = ArticleStatus.PUBLISHED;
+    this.status = ArticleStatuses.PUBLISHED;
     this.publishedAt = new Date();
     this.updatedAt = new Date();
   }
@@ -231,7 +236,7 @@ export class Article {
    * 記事をアーカイブ
    */
   archive(): void {
-    this.status = ArticleStatus.ARCHIVED;
+    this.status = ArticleStatuses.ARCHIVED;
     this.updatedAt = new Date();
   }
 
@@ -239,7 +244,7 @@ export class Article {
    * 記事をドラフトに戻す
    */
   unpublish(): void {
-    this.status = ArticleStatus.DRAFT;
+    this.status = ArticleStatuses.DRAFT;
     this.publishedAt = undefined;
     this.updatedAt = new Date();
   }
@@ -274,21 +279,21 @@ export class Article {
    * 公開済みかどうか
    */
   isPublished(): boolean {
-    return this.status === ArticleStatus.PUBLISHED;
+    return this.status === ArticleStatuses.PUBLISHED;
   }
 
   /**
    * ドラフトかどうか
    */
   isDraft(): boolean {
-    return this.status === ArticleStatus.DRAFT;
+    return this.status === ArticleStatuses.DRAFT;
   }
 
   /**
    * アーカイブ済みかどうか
    */
   isArchived(): boolean {
-    return this.status === ArticleStatus.ARCHIVED;
+    return this.status === ArticleStatuses.ARCHIVED;
   }
 
   /**
@@ -479,11 +484,11 @@ export class Article {
    */
   private getCategoryId(): string {
     switch (this.category) {
-      case ArticleCategory.AI_UTILIZATION:
+      case ArticleCategories.AI_UTILIZATION:
         return 'category-ai-utilization';
-      case ArticleCategory.ORGANIZATION_DEVELOPMENT:
+      case ArticleCategories.ORGANIZATION_DEVELOPMENT:
         return 'category-organization-development';
-      case ArticleCategory.WELL_BEING:
+      case ArticleCategories.WELL_BEING:
         return 'category-well-being';
       default:
         return 'category-other';
