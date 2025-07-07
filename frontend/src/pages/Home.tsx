@@ -70,29 +70,29 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          {/* Glitch Text Effect */}
+          {/* Core Message */}
           <div className="mb-6 inline-block">
             <span className="text-sm font-mono text-neon-blue uppercase tracking-[0.2em] animate-pulse">
-              Welcome to the future
+              △→〇　循環型の社会へ
             </span>
           </div>
 
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black mb-8 relative">
             <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
-              Creative
+              創造性を
             </span>
             <span className="block text-white mt-2">
-              Developer
+              解放する
             </span>
             <span className="absolute -inset-1 blur-lg bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-30 animate-pulse"></span>
           </h1>
 
           <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Building 
-            <span className="text-neon-blue font-bold"> next-generation </span>
-            digital experiences with 
-            <span className="text-neon-purple font-bold"> cutting-edge </span>
-            technology
+            AIを
+            <span className="text-neon-blue font-bold">パートナー</span>
+            に、あなたの内側にある答えを見つけ出し、
+            <span className="text-neon-purple font-bold">唯一無二の個性</span>
+            を育てていく
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -103,7 +103,7 @@ export default function Home() {
                 className="group relative overflow-hidden px-8 py-4 text-lg font-bold animate-glow"
               >
                 <span className="relative z-10 flex items-center">
-                  Explore My Work
+                  創造の旅を始める
                   <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -118,7 +118,7 @@ export default function Home() {
                 size="lg" 
                 className="border-2 border-white/20 hover:border-white/40 backdrop-blur-sm px-8 py-4 text-lg font-bold"
               >
-                Get In Touch
+                対話を始める
               </Button>
             </Link>
           </div>
@@ -140,11 +140,11 @@ export default function Home() {
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl font-black mb-6">
               <span className="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent">
-                Featured Projects
+                AI × 組織開発 × Well-being
               </span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Pushing boundaries with every line of code
+              正解は外にあるのではない。あなたの中にある創造性が、循環型社会への扉を開く。
             </p>
           </div>
 
@@ -245,7 +245,7 @@ export default function Home() {
           <div className="text-center mt-16">
             <Link to="/portfolio">
               <Button variant="ghost" size="lg" className="group">
-                View All Projects
+                すべての活動を見る
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -261,11 +261,11 @@ export default function Home() {
           <div className="text-center mb-20">
             <h2 className="text-5xl sm:text-6xl font-black mb-6">
               <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                Latest Thoughts
+                内なる創造性を育てる
               </span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Ideas, experiments, and lessons learned
+              AI、組織開発、Well-beingの融合から生まれるアイデアと実験
             </p>
           </div>
 
@@ -298,7 +298,7 @@ export default function Home() {
                     </h3>
                     
                     <div className="flex items-center text-neon-purple font-medium">
-                      Read Article
+                      記事を読む
                       <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -312,7 +312,7 @@ export default function Home() {
           <div className="text-center mt-16">
             <Link to="/blog">
               <Button variant="ghost" size="lg" className="group">
-                Read All Articles
+                すべての記事を読む
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -329,12 +329,12 @@ export default function Home() {
         <div className="relative max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-black mb-8">
             <span className="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent animate-gradient-x">
-              Let's Build Something Amazing
+              あなたの創造性を、一緒に解放しませんか
             </span>
           </h2>
           
           <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            Have a project in mind? I'd love to hear about it. Let's create something extraordinary together.
+            内側にある答えを見つけ出し、唯一無二の個性を育てる旅を、共に歩んでいきましょう。
           </p>
           
           <Link to="/contact">
@@ -343,7 +343,7 @@ export default function Home() {
               size="lg" 
               className="animate-pulse-scale"
             >
-              Start a Conversation
+              対話を始める
               <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
