@@ -6,471 +6,105 @@
 
 ## 🏗 システム構成図
 
-**Excalidraw で作成:** https://excalidraw.com
+**Draw.io で作成:** https://app.diagrams.net
 
-```json
-{
-  "type": "excalidraw",
-  "version": 2,
-  "source": "https://excalidraw.com",
-  "elements": [
-    {
-      "type": "rectangle",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "ui-layer",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 100,
-      "y": 50,
-      "strokeColor": "#1e40af",
-      "backgroundColor": "#3B82F6",
-      "width": 200,
-      "height": 60,
-      "seed": 1
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "ui-text",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 150,
-      "y": 70,
-      "strokeColor": "#ffffff",
-      "backgroundColor": "transparent",
-      "width": 100,
-      "height": 20,
-      "seed": 1,
-      "text": "記事作成UI",
-      "fontSize": 16,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle"
-    },
-    {
-      "type": "rectangle",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "usecase-layer",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 100,
-      "y": 150,
-      "strokeColor": "#6b21a8",
-      "backgroundColor": "#8B5CF6",
-      "width": 200,
-      "height": 60,
-      "seed": 1
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "usecase-text",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 140,
-      "y": 170,
-      "strokeColor": "#ffffff",
-      "backgroundColor": "transparent",
-      "width": 120,
-      "height": 20,
-      "seed": 1,
-      "text": "Use Case Layer",
-      "fontSize": 16,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle"
-    },
-    {
-      "type": "rectangle",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "domain-layer",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 100,
-      "y": 250,
-      "strokeColor": "#047857",
-      "backgroundColor": "#10B981",
-      "width": 200,
-      "height": 60,
-      "seed": 1
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "domain-text",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 140,
-      "y": 270,
-      "strokeColor": "#ffffff",
-      "backgroundColor": "transparent",
-      "width": 120,
-      "height": 20,
-      "seed": 1,
-      "text": "Domain Layer",
-      "fontSize": 16,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle"
-    },
-    {
-      "type": "rectangle",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "infra-layer",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 350,
-      "y": 200,
-      "strokeColor": "#d97706",
-      "backgroundColor": "#F59E0B",
-      "width": 200,
-      "height": 100,
-      "seed": 1
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "infra-text",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 380,
-      "y": 220,
-      "strokeColor": "#ffffff",
-      "backgroundColor": "transparent",
-      "width": 140,
-      "height": 60,
-      "seed": 1,
-      "text": "Infrastructure\nLayer",
-      "fontSize": 16,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle"
-    },
-    {
-      "type": "rectangle",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "core-layer",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 100,
-      "y": 350,
-      "strokeColor": "#dc2626",
-      "backgroundColor": "#EF4444",
-      "width": 200,
-      "height": 60,
-      "seed": 1
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "core-text",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 150,
-      "y": 370,
-      "strokeColor": "#ffffff",
-      "backgroundColor": "transparent",
-      "width": 100,
-      "height": 20,
-      "seed": 1,
-      "text": "Core Layer",
-      "fontSize": 16,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle"
-    },
-    {
-      "type": "rectangle",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "sanity-cms",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 600,
-      "y": 150,
-      "strokeColor": "#ec4899",
-      "backgroundColor": "#F472B6",
-      "width": 150,
-      "height": 80,
-      "seed": 1
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "sanity-text",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 640,
-      "y": 180,
-      "strokeColor": "#ffffff",
-      "backgroundColor": "transparent",
-      "width": 70,
-      "height": 20,
-      "seed": 1,
-      "text": "Sanity CMS",
-      "fontSize": 14,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle"
-    },
-    {
-      "type": "rectangle",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "storage",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 600,
-      "y": 280,
-      "strokeColor": "#4b5563",
-      "backgroundColor": "#6B7280",
-      "width": 150,
-      "height": 60,
-      "seed": 1
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "storage-text",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 620,
-      "y": 300,
-      "strokeColor": "#ffffff",
-      "backgroundColor": "transparent",
-      "width": 110,
-      "height": 20,
-      "seed": 1,
-      "text": "Assets Storage",
-      "fontSize": 14,
-      "fontFamily": 1,
-      "textAlign": "center",
-      "verticalAlign": "middle"
-    },
-    {
-      "type": "arrow",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "arrow-ui-usecase",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 200,
-      "y": 110,
-      "strokeColor": "#1f2937",
-      "backgroundColor": "transparent",
-      "width": 0,
-      "height": 40,
-      "seed": 1,
-      "startBinding": null,
-      "endBinding": null,
-      "points": [[0, 0], [0, 40]],
-      "lastCommittedPoint": [0, 40]
-    },
-    {
-      "type": "arrow",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "arrow-usecase-domain",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 200,
-      "y": 210,
-      "strokeColor": "#1f2937",
-      "backgroundColor": "transparent",
-      "width": 0,
-      "height": 40,
-      "seed": 1,
-      "startBinding": null,
-      "endBinding": null,
-      "points": [[0, 0], [0, 40]],
-      "lastCommittedPoint": [0, 40]
-    },
-    {
-      "type": "arrow",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "arrow-usecase-infra",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 300,
-      "y": 180,
-      "strokeColor": "#1f2937",
-      "backgroundColor": "transparent",
-      "width": 50,
-      "height": 40,
-      "seed": 1,
-      "startBinding": null,
-      "endBinding": null,
-      "points": [[0, 0], [50, 40]],
-      "lastCommittedPoint": [50, 40]
-    },
-    {
-      "type": "arrow",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "arrow-infra-sanity",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 550,
-      "y": 220,
-      "strokeColor": "#1f2937",
-      "backgroundColor": "transparent",
-      "width": 50,
-      "height": -30,
-      "seed": 1,
-      "startBinding": null,
-      "endBinding": null,
-      "points": [[0, 0], [50, -30]],
-      "lastCommittedPoint": [50, -30]
-    },
-    {
-      "type": "arrow",
-      "version": 1,
-      "versionNonce": 1,
-      "isDeleted": false,
-      "id": "arrow-sanity-storage",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": 675,
-      "y": 230,
-      "strokeColor": "#1f2937",
-      "backgroundColor": "transparent",
-      "width": 0,
-      "height": 50,
-      "seed": 1,
-      "startBinding": null,
-      "endBinding": null,
-      "points": [[0, 0], [0, 50]],
-      "lastCommittedPoint": [0, 50]
-    }
-  ],
-  "appState": {
-    "gridSize": null,
-    "viewBackgroundColor": "#ffffff"
-  },
-  "files": {}
-}
+### 📋 Draw.io用データ（XMLファイル）
+
+```xml
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="Claude" etag="123" version="22.1.16">
+  <diagram name="画像アップロードシステム" id="architecture">
+    <mxGraphModel dx="1422" dy="882" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- UI Layer -->
+        <mxCell id="ui-layer" value="記事作成UI&#xa;(Presentation Layer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3B82F6;fontColor=#ffffff;strokeColor=#1e40af;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Use Case Layer -->
+        <mxCell id="usecase-layer" value="CreateArticleWithImages&#xa;(Use Case Layer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8B5CF6;fontColor=#ffffff;strokeColor=#6b21a8;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="150" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Domain Layer -->
+        <mxCell id="domain-layer" value="Article, Image&#xa;(Domain Layer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10B981;fontColor=#ffffff;strokeColor=#047857;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="250" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Infrastructure Layer -->
+        <mxCell id="infra-layer" value="Sharp Processor&#xa;Sanity Client&#xa;(Infrastructure Layer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F59E0B;fontColor=#ffffff;strokeColor=#d97706;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="450" y="200" width="180" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Core Layer -->
+        <mxCell id="core-layer" value="Config, Logger, Errors&#xa;(Core Layer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF4444;fontColor=#ffffff;strokeColor=#dc2626;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="350" width="200" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- External Services -->
+        <mxCell id="sanity-cms" value="Sanity CMS&#xa;API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F472B6;fontColor=#ffffff;strokeColor=#ec4899;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="700" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="storage" value="Assets Storage&#xa;(Images)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6B7280;fontColor=#ffffff;strokeColor=#4b5563;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="700" y="250" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrows -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#1f2937;strokeColor=#1f2937;" edge="1" parent="1" source="ui-layer" target="usecase-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#1f2937;strokeColor=#1f2937;" edge="1" parent="1" source="usecase-layer" target="domain-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#1f2937;strokeColor=#1f2937;" edge="1" parent="1" source="usecase-layer" target="infra-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#1f2937;strokeColor=#1f2937;" edge="1" parent="1" source="infra-layer" target="sanity-cms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#1f2937;strokeColor=#1f2937;" edge="1" parent="1" source="sanity-cms" target="storage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#1f2937;strokeColor=#1f2937;" edge="1" parent="1" source="domain-layer" target="core-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Labels -->
+        <mxCell id="title" value="画像アップロードシステム アーキテクチャ" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#1f2937;" vertex="1" parent="1">
+          <mxGeometry x="250" y="10" width="300" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="clean-arch-label" value="クリーンアーキテクチャ&#xa;依存性の方向: 外側 → 内側" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#6b7280;" vertex="1" parent="1">
+          <mxGeometry x="50" y="200" width="140" height="40" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
 ```
 
-**👆 この JSON を https://excalidraw.com にコピペして開いてください！**
-
 ### 📝 使い方
-1. https://excalidraw.com を開く
-2. 左上の「Open」→「Load from clipboard」
-3. 上記JSONをペースト
-4. 手書き風の図が表示されます！
+1. **https://app.diagrams.net** を開く
+2. 「**新しい図表を作成**」を選択
+3. 「**既存の図表から**」→「**Device**」を選択
+4. 上記XMLをコピーして「**.drawio**」ファイルとして保存
+5. そのファイルをDraw.ioで開く
 
 ### ✨ 図の特徴
-- 🎨 手書き風でおしゃれ
-- 🌈 レイヤー別に色分け（青→紫→緑→オレンジ→赤）
-- ➡️ 依存関係を矢印で表現
-- 📱 クリーンアーキテクチャの構造を視覚化
+- 🎨 プロフェッショナルなビジュアル
+- 🌈 レイヤー別カラーコーディング
+- ➡️ 明確な依存関係表現
+- 📋 クリーンアーキテクチャの構造を視覚化
+- 🔧 編集・共有が簡単
 
 ## 📁 レイヤー別構成
 
