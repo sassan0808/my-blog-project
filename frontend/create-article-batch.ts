@@ -6,7 +6,6 @@ loadEnv({ path: '.env.local' });
 
 import { promises as fs } from 'fs';
 import { 
-  CreateArticleWithImagesUseCase,
   createArticleWithImagesUseCase
 } from './src/lib/application/use-cases/create-article-with-images';
 import type { CreateArticleRequest } from './src/lib/application/use-cases/create-article-with-images';
