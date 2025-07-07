@@ -1,4 +1,4 @@
-import { 
+import type { 
   ApplicationConfig, 
   ConfigProvider, 
   ConfigManager, 
@@ -169,7 +169,7 @@ export class EnvironmentConfigProvider implements ConfigProvider {
     return config;
   }
 
-  async save(config: ApplicationConfig): Promise<void> {
+  async save(): Promise<void> {
     // 環境変数ベースの設定は直接保存できないため、エラーを投げる
     throw new Error('Environment-based configuration cannot be saved directly. Please update environment variables.');
   }
@@ -250,7 +250,7 @@ export class EnvironmentConfigProvider implements ConfigProvider {
     };
   }
 
-  watch(callback: (config: ApplicationConfig) => void): void {
+  watch(): void {
     // 環境変数の変更監視は複雑なため、基本実装では対応しない
     console.warn('Environment variable watching is not implemented');
   }

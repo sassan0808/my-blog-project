@@ -6,7 +6,7 @@ import { BaseError } from './base-error';
 export interface ValidationError {
   field: string;
   message: string;
-  value?: any;
+  value?: unknown;
 }
 
 /**

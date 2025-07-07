@@ -45,7 +45,7 @@ export interface ImageProcessingConfig {
   processors: {
     sharp: {
       enabled: boolean;
-      options: Record<string, any>;
+      options: Record<string, unknown>;
     };
   };
 }
@@ -127,7 +127,7 @@ export interface ValidationResult {
 export interface ValidationError {
   field: string;
   message: string;
-  value: any;
+  value: unknown;
   constraint: string;
 }
 
@@ -137,7 +137,7 @@ export interface ValidationError {
 export interface ValidationWarning {
   field: string;
   message: string;
-  value: any;
+  value: unknown;
   recommendation: string;
 }
 

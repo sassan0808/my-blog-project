@@ -58,13 +58,13 @@ export class SanityConfigurationError extends BaseError {
 export class SanityApiError extends BaseError {
   public readonly apiMethod: string;
   public readonly responseStatus?: number;
-  public readonly responseBody?: any;
+  public readonly responseBody?: unknown;
 
   constructor(
     message: string,
     apiMethod: string,
     responseStatus?: number,
-    responseBody?: any
+    responseBody?: unknown
   ) {
     super(message, 'SANITY_API_ERROR', responseStatus || 500, true, {
       apiMethod,

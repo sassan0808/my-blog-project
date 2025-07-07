@@ -1,4 +1,5 @@
-import { Logger, LogLevel, LogMetadata, LoggerConfig, LogDestination, PerformanceLogger } from './logger.interface';
+import type { Logger, LogMetadata, LoggerConfig, PerformanceLogger } from './logger.interface';
+import { LogLevel } from './logger.interface';
 import { BaseError } from '../errors/base-error';
 
 /**
@@ -10,7 +11,7 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
   private userId?: string;
   private sessionId?: string;
   private context?: string;
-  private contextData?: Record<string, any>;
+  private contextData?: Record<string, unknown>;
   private timers: Map<string, number> = new Map();
 
   constructor(config: LoggerConfig) {
@@ -50,23 +51,23 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
     [LogLevel.ERROR]: '🚨'
   };
 
-  debug(message: string, context?: string, data?: Record<string, any>): void {
+  debug(message: string, context?: string, data?: Record<string, unknown>): void {
     this.log(LogLevel.DEBUG, message, context, data);
   }
 
-  info(message: string, context?: string, data?: Record<string, any>): void {
+  info(message: string, context?: string, data?: Record<string, unknown>): void {
     this.log(LogLevel.INFO, message, context, data);
   }
 
-  warn(message: string, context?: string, data?: Record<string, any>): void {
+  warn(message: string, context?: string, data?: Record<string, unknown>): void {
     this.log(LogLevel.WARN, message, context, data);
   }
 
-  error(message: string, error?: Error | BaseError, context?: string, data?: Record<string, any>): void {
+  error(message: string, error?: Error | BaseError, context?: string, data?: Record<string, unknown>): void {
     this.log(LogLevel.ERROR, message, context, data, error);
   }
 
-  private log(level: LogLevel, message: string, context?: string, data?: Record<string, any>, error?: Error | BaseError): void {
+  private log(level: LogLevel, message: string, context?: string, data?: Record<string, unknown>, error?: Error | BaseError): void {
     if (!this.isLevelEnabled(level)) {
       return;
     }
@@ -155,7 +156,7 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
     }
   }
 
-  child(context: string, data?: Record<string, any>): Logger {
+  child(context: string, data?: Record<string, unknown>): Logger {
     const childLogger = new ConsoleLogger(this.config);
     childLogger.correlationId = this.correlationId;
     childLogger.userId = this.userId;
@@ -208,7 +209,7 @@ export class ConsoleLogger implements Logger, PerformanceLogger {
     };
   }
 
-  recordDuration(operation: string, durationMs: number, context?: string, data?: Record<string, any>): void {
+  recordDuration(operation: string, durationMs: number, context?: string, data?: Record<string, unknown>): void {
     const emoji = durationMs > 1000 ? '🐌' : durationMs > 100 ? '⏳' : '⚡';
     this.info(`${emoji} ${operation} completed in ${durationMs}ms`, context, {
       operation,

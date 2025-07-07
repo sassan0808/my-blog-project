@@ -3,7 +3,6 @@ import {
   MediaType, 
   MediaMetadata, 
   ImageFormat, 
-  ProcessedMedia, 
   UploadedMedia,
   ImageAnalysis,
   ImagePlacement,
@@ -243,7 +242,7 @@ export class Image implements Media {
   /**
    * 画像情報を JSON 形式で出力
    */
-  toJSON(): Record<string, any> {
+  toJSON(): Record<string, unknown> {
     return {
       id: this.id,
       type: this.type,
@@ -330,7 +329,7 @@ export class Image implements Media {
         // 実際の実装では適切なJPEGパーサーを使用
         metadata.dimensions = { width: 0, height: 0 }; // プレースホルダー
       }
-    } catch (error) {
+    } catch {
       // エラーが発生した場合は無視
     }
 
@@ -397,7 +396,7 @@ export class ProcessedImage extends Image {
   /**
    * 処理統計を取得
    */
-  getProcessingStats(): Record<string, any> {
+  getProcessingStats(): Record<string, unknown> {
     return {
       processingTime: this.processingTime,
       sizeDifference: this.sizeDifference,

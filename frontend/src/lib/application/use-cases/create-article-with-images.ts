@@ -1,27 +1,23 @@
 import { promises as fs } from 'fs';
-import path from 'path';
-import { 
+import type { 
   ImageProcessor,
   ValidationOptions,
-  AnalysisOptions,
-  ImageProcessingOptions
+  AnalysisOptions
 } from '../../infrastructure/image-processing/image-processor.interface';
 import { SharpImageProcessor } from '../../infrastructure/image-processing/sharp-processor';
 import { SanityImageUploader } from '../../infrastructure/sanity/sanity-image-uploader';
 import { SanityArticlePublisher } from '../../infrastructure/sanity/sanity-article-publisher';
-import { Article, ArticleBuilder, ArticleCategory } from '../../domain/entities/article';
+import { ArticleBuilder, ArticleCategory } from '../../domain/entities/article';
 import { Image } from '../../domain/entities/image';
-import { 
+import type { 
   ImageReference, 
   UploadedMedia, 
-  ImagePlacement, 
   OptimizationOptions 
 } from '../../domain/entities/media.interface';
-import { ApplicationConfig } from '../../core/config/config.interface';
-import { Logger } from '../../core/logging/logger.interface';
+import type { ApplicationConfig } from '../../core/config/config.interface';
+import type { Logger } from '../../core/logging/logger.interface';
 import { createDefaultLogger } from '../../core/logging/console-logger';
 import { ImageValidationError, ImageProcessingError } from '../../core/errors/image-error';
-import { BaseError } from '../../core/errors/base-error';
 
 /**
  * 記事作成のリクエスト
@@ -420,10 +416,10 @@ export class CreateArticleWithImagesUseCase {
     }
   }
 
-  private parseContentToPortableText(content: string): any[] {
+  private parseContentToPortableText(content: string): Array<Record<string, unknown>> {
     // 基本的なMarkdown to PortableText変換
     const lines = content.split('\n');
-    const blocks: any[] = [];
+    const blocks: Array<Record<string, unknown>> = [];
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
@@ -497,7 +493,12 @@ export class CreateArticleWithImagesUseCase {
 
       let processingStats;
       if (processedImage && 'originalImage' in processedImage) {
-        const processed = processedImage as any; // ProcessedImage
+        const processed = processedImage as { 
+          originalImage: Image; 
+          fileSize: number; 
+          sizeDifference: { compressionRatio: number }; 
+          processingTime: number; 
+        };
         processingStats = {
           originalSize: processed.originalImage.fileSize,
           processedSize: processed.fileSize,

@@ -1,6 +1,6 @@
 import sharp from 'sharp';
 import { fileTypeFromBuffer } from 'file-type';
-import { 
+import type { 
   ImageProcessor,
   ValidationOptions,
   AnalysisOptions,
@@ -9,7 +9,7 @@ import {
   WatermarkOptions,
   ImageProcessingOptions
 } from './image-processor.interface';
-import { 
+import type { 
   MediaMetadata, 
   MediaValidationResult, 
   OptimizationOptions,
@@ -20,10 +20,9 @@ import { Image, ProcessedImage } from '../../domain/entities/image';
 import { 
   ImageValidationError, 
   ImageFormatError, 
-  ImageSizeError, 
   ImageProcessingError 
 } from '../../core/errors/image-error';
-import { Logger } from '../../core/logging/logger.interface';
+import type { Logger } from '../../core/logging/logger.interface';
 import { createDefaultLogger } from '../../core/logging/console-logger';
 
 /**
@@ -426,16 +425,15 @@ export class SharpImageProcessor implements ImageProcessor {
 
     try {
       const metadata = await this.getMetadata(buffer);
-      const sharpMetadata = await sharp(buffer).metadata();
 
       // 基本的な分析（実際の実装ではAI APIを使用）
       const analysis: ImageAnalysis = {
         description: await this.generateDescription(buffer, metadata),
         suggestedAltText: await this.generateAltText(buffer, options),
-        detectedObjects: options.detectObjects ? await this.detectObjects(buffer) : [],
+        detectedObjects: options.detectObjects ? await this.detectObjects() : [],
         dominantColors: options.analyzeColors ? await this.analyzeDominantColors(buffer) : [],
-        textContent: options.extractText ? await this.extractText(buffer) : undefined,
-        sentiment: options.analyzeSentiment ? await this.analyzeSentiment(buffer) : undefined,
+        textContent: options.extractText ? await this.extractText() : undefined,
+        sentiment: options.analyzeSentiment ? await this.analyzeSentiment() : undefined,
         appropriateForContent: true, // 基本的には適切と判定
         suggestedPlacement: this.suggestPlacement(metadata),
         confidence: 0.7 // 基本実装では中程度の信頼度
@@ -562,7 +560,7 @@ export class SharpImageProcessor implements ImageProcessor {
   async processBatch(images: Array<{
     image: Image;
     options: ImageProcessingOptions;
-  }>): Promise<Array<any>> {
+  }>): Promise<Array<Record<string, unknown>>> {
     const stopTimer = this.logger.startTimer('processBatch');
 
     try {
@@ -615,7 +613,7 @@ export class SharpImageProcessor implements ImageProcessor {
     return positionMap[position] || 'southeast';
   }
 
-  private async generateDescription(buffer: Buffer, metadata: MediaMetadata): Promise<string> {
+  private async generateDescription(_buffer: Buffer, metadata: MediaMetadata): Promise<string> {
     // 基本的な説明生成（実際の実装では画像認識AIを使用）
     const dimensions = metadata.dimensions;
     if (dimensions) {
@@ -631,17 +629,17 @@ export class SharpImageProcessor implements ImageProcessor {
     return 'An image file';
   }
 
-  private async generateAltText(buffer: Buffer, options: AnalysisOptions): Promise<string> {
+  private async generateAltText(_buffer: Buffer, options: AnalysisOptions): Promise<string> {
     if (!options.generateAltText) {
       return 'Image';
     }
     
     // 基本的なalt text生成（実際の実装では画像認識AIを使用）
-    const metadata = await this.getMetadata(buffer);
+    const metadata = await this.getMetadata(_buffer);
     return `Image (${metadata.format?.toUpperCase()}, ${metadata.dimensions?.width}x${metadata.dimensions?.height})`;
   }
 
-  private async detectObjects(buffer: Buffer): Promise<string[]> {
+  private async detectObjects(): Promise<string[]> {
     // 基本実装では空配列を返す（実際の実装ではAI APIを使用）
     return [];
   }
@@ -655,12 +653,12 @@ export class SharpImageProcessor implements ImageProcessor {
     }
   }
 
-  private async extractText(buffer: Buffer): Promise<string> {
+  private async extractText(): Promise<string> {
     // OCR機能の基本実装（実際の実装ではTesseract.jsなどを使用）
     return '';
   }
 
-  private async analyzeSentiment(buffer: Buffer): Promise<'positive' | 'negative' | 'neutral'> {
+  private async analyzeSentiment(): Promise<'positive' | 'negative' | 'neutral'> {
     // 感情分析の基本実装（実際の実装では感情分析AIを使用）
     return 'neutral';
   }

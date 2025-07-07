@@ -1,9 +1,7 @@
 import { createClient, SanityClient } from '@sanity/client';
 import { 
   ArticlePublisher,
-  SanityPost,
-  ArticleCreateOptions,
-  TransactionResult
+  SanityPost
 } from './sanity-client.interface';
 import { SanityImageUploader } from './sanity-image-uploader';
 import { SanityConfig } from '../../core/config/config.interface';
@@ -11,8 +9,7 @@ import { Article, ArticleCategory } from '../../domain/entities/article';
 import { Image } from '../../domain/entities/image';
 import { UploadedMedia } from '../../domain/entities/media.interface';
 import { 
-  SanityDocumentError, 
-  SanityApiError,
+  SanityDocumentError,
   SanityConfigurationError
 } from '../../core/errors/sanity-error';
 import { Logger } from '../../core/logging/logger.interface';

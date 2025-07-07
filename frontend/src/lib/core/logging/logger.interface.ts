@@ -18,7 +18,7 @@ export interface LogMetadata {
   level: LogLevel;
   message: string;
   context?: string;
-  data?: Record<string, any>;
+  data?: Record<string, unknown>;
   error?: Error | BaseError;
   correlationId?: string;
   userId?: string;
@@ -72,27 +72,27 @@ export interface Logger {
   /**
    * デバッグレベルのログ
    */
-  debug(message: string, context?: string, data?: Record<string, any>): void;
+  debug(message: string, context?: string, data?: Record<string, unknown>): void;
 
   /**
    * 情報レベルのログ
    */
-  info(message: string, context?: string, data?: Record<string, any>): void;
+  info(message: string, context?: string, data?: Record<string, unknown>): void;
 
   /**
    * 警告レベルのログ
    */
-  warn(message: string, context?: string, data?: Record<string, any>): void;
+  warn(message: string, context?: string, data?: Record<string, unknown>): void;
 
   /**
    * エラーレベルのログ
    */
-  error(message: string, error?: Error | BaseError, context?: string, data?: Record<string, any>): void;
+  error(message: string, error?: Error | BaseError, context?: string, data?: Record<string, unknown>): void;
 
   /**
    * 子ロガーの作成（コンテキスト付き）
    */
-  child(context: string, data?: Record<string, any>): Logger;
+  child(context: string, data?: Record<string, unknown>): Logger;
 
   /**
    * 相関IDの設定
@@ -128,6 +128,21 @@ export interface Logger {
    * ロガーのクリーンアップ
    */
   close(): Promise<void>;
+
+  /**
+   * 処理時間の測定を開始
+   */
+  startTimer(operation: string, context?: string): () => void;
+
+  /**
+   * 処理時間を記録
+   */
+  recordDuration(operation: string, durationMs: number, context?: string, data?: Record<string, unknown>): void;
+
+  /**
+   * メモリ使用量を記録
+   */
+  recordMemoryUsage(operation: string, context?: string): void;
 }
 
 /**
@@ -150,7 +165,7 @@ export interface PerformanceLogger {
   /**
    * 処理時間を記録
    */
-  recordDuration(operation: string, durationMs: number, context?: string, data?: Record<string, any>): void;
+  recordDuration(operation: string, durationMs: number, context?: string, data?: Record<string, unknown>): void;
 
   /**
    * メモリ使用量を記録

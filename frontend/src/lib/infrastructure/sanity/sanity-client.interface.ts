@@ -49,7 +49,7 @@ export interface SanityPost extends SanityDocument {
     current: string;
   };
   excerpt?: string;
-  body: any[]; // PortableText
+  body: Array<Record<string, unknown>>; // PortableText
   status: 'draft' | 'published' | 'archived';
   categories: Array<{
     _type: 'reference';
@@ -135,7 +135,7 @@ export interface BatchResult {
   results: Array<{
     id: string;
     success: boolean;
-    result?: any;
+    result?: unknown;
     error?: Error;
   }>;
   errors: Error[];
@@ -249,9 +249,9 @@ export interface SanityClientInterface {
   /**
    * カスタムクエリの実行
    */
-  query<T = any>(
+  query<T = unknown>(
     query: string, 
-    params?: Record<string, any>,
+    params?: Record<string, unknown>,
     options?: QueryOptions
   ): Promise<T>;
 
@@ -260,15 +260,15 @@ export interface SanityClientInterface {
    */
   mutate(
     mutations: Array<{
-      create?: any;
-      createOrReplace?: any;
-      createIfNotExists?: any;
+      create?: Record<string, unknown>;
+      createOrReplace?: Record<string, unknown>;
+      createIfNotExists?: Record<string, unknown>;
       delete?: { id: string };
       patch?: {
         id: string;
-        set?: Record<string, any>;
+        set?: Record<string, unknown>;
         unset?: string[];
-        setIfMissing?: Record<string, any>;
+        setIfMissing?: Record<string, unknown>;
         inc?: Record<string, number>;
         dec?: Record<string, number>;
       };
@@ -280,13 +280,13 @@ export interface SanityClientInterface {
    */
   listen(
     query: string,
-    params?: Record<string, any>,
+    params?: Record<string, unknown>,
     options?: {
       includeResult?: boolean;
       visibility?: 'query' | 'transaction';
     }
   ): {
-    subscribe: (callback: (update: any) => void) => void;
+    subscribe: (callback: (update: unknown) => void) => void;
     unsubscribe: () => void;
   };
 
@@ -414,12 +414,12 @@ export interface SanityCache {
   /**
    * クエリ結果をキャッシュ
    */
-  set(key: string, data: any, ttl?: number): Promise<void>;
+  set(key: string, data: unknown, ttl?: number): Promise<void>;
 
   /**
    * キャッシュからデータを取得
    */
-  get<T = any>(key: string): Promise<T | null>;
+  get<T = unknown>(key: string): Promise<T | null>;
 
   /**
    * キャッシュを削除
@@ -434,5 +434,5 @@ export interface SanityCache {
   /**
    * キャッシュキーを生成
    */
-  generateKey(query: string, params?: Record<string, any>): string;
+  generateKey(query: string, params?: Record<string, unknown>): string;
 }

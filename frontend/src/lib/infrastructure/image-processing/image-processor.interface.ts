@@ -3,7 +3,6 @@ import {
   MediaValidationResult, 
   MediaProcessingResult,
   OptimizationOptions,
-  ProcessedMedia,
   ImageAnalysis
 } from '../../domain/entities/media.interface';
 import { Image, ProcessedImage } from '../../domain/entities/image';

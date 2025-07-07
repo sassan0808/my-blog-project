@@ -23,7 +23,7 @@ export abstract class BaseError extends Error {
   /**
    * エラーの詳細情報
    */
-  public readonly details?: Record<string, any>;
+  public readonly details?: Record<string, unknown>;
 
   /**
    * タイムスタンプ
@@ -35,7 +35,7 @@ export abstract class BaseError extends Error {
     code: string,
     statusCode: number,
     isOperational: boolean = true,
-    details?: Record<string, any>
+    details?: Record<string, unknown>
   ) {
     super(message);
     
@@ -52,7 +52,7 @@ export abstract class BaseError extends Error {
   /**
    * エラー情報をJSON形式で返す
    */
-  toJSON(): Record<string, any> {
+  toJSON(): Record<string, unknown> {
     return {
       name: this.constructor.name,
       message: this.message,

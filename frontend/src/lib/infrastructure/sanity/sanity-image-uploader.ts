@@ -1,22 +1,19 @@
 import { createClient, SanityClient } from '@sanity/client';
-import { 
-  SanityClientInterface,
+import type { 
   ImageUploader,
   SanityAsset,
   UploadOptions,
-  UploadProgress,
-  BatchResult
+  UploadProgress
 } from './sanity-client.interface';
-import { SanityConfig } from '../../core/config/config.interface';
+import type { SanityConfig } from '../../core/config/config.interface';
 import { Image } from '../../domain/entities/image';
-import { UploadedMedia } from '../../domain/entities/media.interface';
+import type { UploadedMedia } from '../../domain/entities/media.interface';
 import { 
   SanityAssetUploadError, 
-  SanityConnectionError, 
   SanityConfigurationError,
   SanityApiError
 } from '../../core/errors/sanity-error';
-import { Logger } from '../../core/logging/logger.interface';
+import type { Logger } from '../../core/logging/logger.interface';
 import { createDefaultLogger } from '../../core/logging/console-logger';
 
 /**
@@ -438,7 +435,7 @@ export class SanityImageUploader implements ImageUploader {
           batch.map(asset => this.deleteImage(asset._id))
         );
 
-        results.forEach((result, index) => {
+        results.forEach((result) => {
           if (result.status === 'fulfilled') {
             deletedCount++;
           } else {
@@ -482,8 +479,9 @@ export class SanityImageUploader implements ImageUploader {
     }
   }
 
-  private isNotFoundError(error: any): boolean {
-    return error?.statusCode === 404 || error?.response?.statusCode === 404;
+  private isNotFoundError(error: unknown): boolean {
+    return (error as { statusCode?: number; response?: { statusCode?: number } })?.statusCode === 404 || 
+           (error as { statusCode?: number; response?: { statusCode?: number } })?.response?.statusCode === 404;
   }
 }
 

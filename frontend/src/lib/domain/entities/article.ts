@@ -172,7 +172,7 @@ export class Article {
   /**
    * 記事に画像を追加
    */
-  addImage(image: Image, placement?: ImagePlacement): void {
+  addImage(image: Image): void {
     if (!this.images.find(img => img.id === image.id)) {
       this.images.push(image);
       this.updateMetadata();
@@ -201,7 +201,7 @@ export class Article {
   /**
    * コンテンツに画像を挿入
    */
-  insertImageInContent(image: Image, position: number, placement: ImagePlacement = ImagePlacement.FIGURE): void {
+  insertImageInContent(image: Image, position: number, _placement: ImagePlacement = ImagePlacement.FIGURE): void {
     const imageBlock: ImageBlock = {
       _type: 'image',
       _key: `image_${image.id}`,
@@ -211,7 +211,7 @@ export class Article {
       },
       alt: image.getAltText(),
       caption: image.caption,
-      placement
+      placement: _placement
     };
 
     this.content.splice(position, 0, imageBlock);
@@ -362,7 +362,7 @@ export class Article {
   /**
    * JSON形式で出力
    */
-  toJSON(): Record<string, any> {
+  toJSON(): Record<string, unknown> {
     return {
       id: this.id,
       title: this.title,
@@ -386,7 +386,7 @@ export class Article {
   /**
    * Sanity用のドキュメント形式で出力
    */
-  toSanityDocument(): Record<string, any> {
+  toSanityDocument(): Record<string, unknown> {
     return {
       _type: 'post',
       _id: this.id,
