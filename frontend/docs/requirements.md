@@ -103,6 +103,8 @@
 - **ブログCMS**: Sanity (Project ID: qcfwoevq)
   - ✅ Sanity Studioを`/studio`に統合完了
   - ✅ 統合スクリプト設定済み（`npm run dev:all`で同時起動）
+  - ✅ 画像アップロード機能付き記事投稿システム実装
+  - ✅ TypeScript厳格設定対応（verbatimModuleSyntax, erasableSyntaxOnly）
 - **ポートフォリオ**: ハードコーディング（将来Sanity移行可能）
 - **お問い合わせ**: Netlify Forms or Vercel Forms
 
@@ -160,6 +162,8 @@ interface Profile {
 - [x] 型定義・データ層設計
 - [x] 共通コンポーネント作成
 - [x] Sanity Studio統合（`/studio`ディレクトリ）
+- [x] 画像アップロードシステム実装（クリーンアーキテクチャ採用）
+- [x] TypeScript厳格設定対応完了
 - [ ] ルーティング設計
 - [ ] 基本レイアウト
 
