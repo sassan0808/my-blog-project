@@ -355,7 +355,7 @@ export class SanityArticlePublisher implements ArticlePublisher {
 
       const createdDocument = await this.client.create(sanityDoc);
       
-      return createdDocument as SanityPost;
+      return createdDocument as unknown as SanityPost;
     } catch (error) {
       throw new SanityDocumentError(
         'Failed to create article document',

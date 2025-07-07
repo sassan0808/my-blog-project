@@ -391,7 +391,7 @@ export class Article {
   /**
    * Sanity用のドキュメント形式で出力
    */
-  toSanityDocument(): Record<string, unknown> {
+  toSanityDocument(): Record<string, unknown> & { _type: string } {
     return {
       _type: 'post',
       _id: this.id,

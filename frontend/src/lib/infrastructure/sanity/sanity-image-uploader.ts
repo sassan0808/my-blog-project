@@ -2,7 +2,6 @@ import { createClient, SanityClient } from '@sanity/client';
 import type { 
   ImageUploader,
   SanityAsset,
-  UploadOptions,
   UploadProgress
 } from './sanity-client.interface';
 import type { SanityConfig } from '../../core/config/config.interface';
@@ -24,7 +23,7 @@ export class SanityImageUploader implements ImageUploader {
   private config: SanityConfig;
   private logger: Logger;
   private progressCallback?: (progress: UploadProgress) => void;
-  private defaultUploadOptions: Partial<UploadOptions> = {};
+  private defaultUploadOptions: Record<string, unknown> = {};
 
   constructor(config: SanityConfig, logger?: Logger) {
     this.config = config;
@@ -67,12 +66,11 @@ export class SanityImageUploader implements ImageUploader {
         stage: 'preparing'
       });
 
-      const uploadOptions: UploadOptions = {
+      const uploadOptions = {
         filename: image.fileName,
         title: image.fileName,
         description: image.caption,
-        creditLine: image.credits,
-        ...this.defaultUploadOptions
+        creditLine: image.credits
       };
 
       this.notifyProgress({
@@ -297,7 +295,7 @@ export class SanityImageUploader implements ImageUploader {
     this.progressCallback = callback;
   }
 
-  setUploadOptions(options: Partial<UploadOptions>): void {
+  setUploadOptions(options: Record<string, unknown>): void {
     this.defaultUploadOptions = { ...this.defaultUploadOptions, ...options };
     this.logger.debug('Upload options updated', 'setUploadOptions', { options });
   }
