@@ -110,5 +110,27 @@ export const projects: Project[] = [
     featured: true,
     createdAt: '2025-07-06',
     category: 'slide'
+  },
+  {
+    id: '11',
+    title: 'GeminiカスタムAI「Gems」の進化と、今すぐ始めるべきこと',
+    description: 'Google GeminiのカスタムAI機能「Gems」の最新動向と、ビジネスや個人での活用方法について解説。',
+    longDescription: 'Google Geminiの革新的な機能である「Gems」について深く掘り下げ、カスタムAIの作成方法から実践的な活用事例まで幅広く紹介。個人の生産性向上からビジネスでの応用まで、今すぐ始められる具体的なアプローチを提案します。',
+    technologies: ['Google Gemini', 'Gems', 'カスタムAI', 'プレゼンテーション'],
+    liveUrl: 'https://vksiernj.gensparkspace.com/',
+    featured: true,
+    createdAt: '2025-07-15',
+    category: 'slide'
+  },
+  {
+    id: '12',
+    title: '開発手法のパラダイムシフト',
+    description: 'AI時代における開発手法の根本的な変革と、新しいソフトウェア開発のアプローチについて解説。',
+    longDescription: '従来のウォーターフォールやアジャイル開発から、AI駆動型開発への移行について包括的に解説。生成AIを活用した高速プロトタイピング、自動コード生成、継続的な最適化など、開発プロセス全体のパラダイムシフトを実例とともに紹介します。',
+    technologies: ['AI駆動開発', '開発手法', 'パラダイムシフト', 'プレゼンテーション'],
+    liveUrl: 'https://fyaqcocn.gensparkspace.com/',
+    featured: true,
+    createdAt: '2025-07-15',
+    category: 'slide'
   }
 ]
