@@ -138,7 +138,7 @@ export const projects: Project[] = [
     title: 'lotsfulサービス説明サイト',
     description: 'パーソルイノベーション株式会社のlotsfulサービスを詳しく紹介するランディングページ。副業人材活用の新しい形を提案。',
     longDescription: 'パーソルイノベーション株式会社が提供するlotsfulサービスの魅力と機能を分かりやすく紹介するランディングページです。企業の副業人材活用をサポートし、新しい働き方のプラットフォームとしての価値を詳細に説明しています。',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    technologies: [],
     liveUrl: 'https://lotsful-sasaki.vercel.app/',
     featured: true,
     createdAt: '2025-07-27',
