@@ -48,13 +48,16 @@ export default function ProfilePage() {
         <div className="max-w-5xl mx-auto">
           <Card className="bg-white dark:bg-brand-navy-800 border-brand-slate-200 dark:border-brand-navy-700 p-8 lg:p-12 shadow-lg">
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
-              2018年の「副業元年」から7年。個人の働き方は「サラリーマン一本」から「複業・兼業」へと多様化し、AIの進歩もまたこの変化を加速させ、企業の人材戦略も根本から見直しが求められてきつつある時代の転換点にいるなあと感じています。
+              働き方の変容を観察し、その可能性を探求しています。
             </p>
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
-              同じような感覚を持っている方がいらっしゃればぜひ情報交換させていただけたらと思っています。
+              2018年の「副業元年」以降、日本の労働市場は静かに、しかし確実に変化してきました。終身雇用という単一の物語から、複数のプロジェクトを横断する「プロジェクトエコノミー」へ。そして生成AIの登場が、この移行を加速させています。
+            </p>
+            <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
+              興味深いのは、この変化が個人と組織の関係性を根本から問い直している点です。従来の「所属」から「参加」へ。固定的な役割から流動的なプロジェクトへ。この転換点において、人と組織はどのような新しい関係を築けるのか——それが私の関心事です。
             </p>
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed font-inter">
-              山梨の甲府に2022年6月から住んでいます。出身が広島県の限界集落ということもあり、地方創生にも興味があります。
+              2022年6月から山梨県甲府市在住。広島県の限界集落出身という背景もあり、地方におけるプロジェクトエコノミーの可能性にも関心を持っています。
             </p>
           </Card>
         </div>
@@ -69,8 +72,11 @@ export default function ProfilePage() {
           <div className="w-20 h-1 bg-brand-gold-500 mx-auto mb-12"></div>
 
           <Card className="bg-white dark:bg-brand-navy-800 border-brand-slate-200 dark:border-brand-navy-700 p-8 lg:p-12 shadow-lg">
+            <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
+              パーソルイノベーション株式会社で、副業・兼業人材と企業をつなぐプラットフォーム「lotsful」の仕事をしています。
+            </p>
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed font-inter">
-              本業は、<span className="text-brand-navy-900 dark:text-white font-semibold">パーソルイノベーション株式会社</span>「lotsful」のアカウントコンサルタントとして、この変革期だからこそ必要な「民主化されたAIからの情報だけではなく、実践知の共有」を可能にする副業/兼業マッチングという選択肢をご提案しています。
+              日々の業務を通じて実感するのは、生成AIが「情報の民主化」をもたらした一方で、「実践知」の価値がより際立ってきているということです。具体的なプロジェクトの中で磨かれた知見——それは、まだAIでは代替できない領域です。プロジェクトベースで専門家と協働する仕組みは、この実践知を組織に取り込む新しい方法論だと考えています。
             </p>
           </Card>
         </div>
@@ -80,16 +86,19 @@ export default function ProfilePage() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-brand-navy-800">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-playfair font-bold mb-8 text-center text-brand-navy-900 dark:text-white">
-            AIと実践知 — これからの組織づくりの鍵
+            プロジェクトエコノミーと実践知
           </h2>
           <div className="w-20 h-1 bg-brand-gold-500 mx-auto mb-12"></div>
 
           <Card className="bg-brand-slate-50 dark:bg-brand-navy-700 border-brand-slate-200 dark:border-brand-navy-600 p-8 lg:p-12 shadow-lg">
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
-              AIによって一般的な情報は誰でもアクセスできるようになりました。極端な話小学生でも上位のコンサルタント能力をもつ知識にアクセスが容易になっていますが、AIで補填できないものとしての「実践知」を共有できる構造にしていくことで、量から質への転換。イノベーションを起こすための土壌が形成しやすくなるのではないかと考えています。
+              AIの進化は、知識労働の前提を変えました。かつて希少だった情報へのアクセスは民主化され、今や誰もが高度な知識にリーチできます。しかし、それゆえに「実践知」の価値が浮き彫りになってきています。
+            </p>
+            <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
+              実践知とは、現場での試行錯誤を通じて獲得される、文脈に依存した知恵です。それは体系化が難しく、簡単には言語化できません。だからこそAIには代替できず、人と人との直接的な協働を通じてしか伝達されない。
             </p>
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed font-inter">
-              <span className="text-brand-navy-900 dark:text-white font-semibold">パーソルイノベーション株式会社</span>が提供する専門的な知見をもつ方々より登録していただいたデータベースを必要なタイミングでご活用いただけるサービス設計になっており、初期費用不要で人材にアクセスが可能です。
+              プロジェクトエコノミーは、この実践知を組織の境界を越えて流通させる新しいインフラです。専門家が複数のプロジェクトを渡り歩くことで、異なる文脈間で知見が受粉され、イノベーションの土壌が豊かになる——私はそんな未来を構想しています。
             </p>
           </Card>
         </div>
@@ -124,19 +133,19 @@ export default function ProfilePage() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-brand-navy-800">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-playfair font-bold mb-8 text-center text-brand-navy-900 dark:text-white">
-            AIと副業がもたらす組織変革の未来図
+            組織の再定義——所属から参加へ
           </h2>
           <div className="w-20 h-1 bg-brand-gold-500 mx-auto mb-12"></div>
 
           <Card className="bg-brand-slate-50 dark:bg-brand-navy-700 border-brand-slate-200 dark:border-brand-navy-600 p-8 lg:p-12 shadow-lg">
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
-              生成AIの台頭は、単なる業務効率化にとどまらず、「組織の在り方」そのものを問い直す契機となっています。このパラダイムシフトの時代だからこそ、副業人材との共創によって、組織の枠を超えた新たな価値が生まれています。
+              20世紀型の雇用モデルは、個人と組織を「所属」という強固な関係で結びつけていました。しかし、プロジェクトエコノミーは、この関係性を「参加」へと転換させつつあります。
+            </p>
+            <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed mb-6 font-inter">
+              参加型の働き方は、個人に自律性を与えると同時に、組織に柔軟性をもたらします。専門性を持つ人材が、必要なときに必要なプロジェクトに参加する——そのような流動的な協働が、イノベーションの速度を加速させています。
             </p>
             <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 leading-relaxed font-inter">
-              専門性の高い人材を、従来の採用プロセスよりも迅速に、柔軟に獲得する方法を、貴社のビジネス状況に合わせてカスタマイズしてご提案いたします。
-            </p>
-            <p className="text-lg text-brand-slate-600 dark:text-brand-slate-300 leading-relaxed mt-4 font-inter">
-              また、副業/兼業希望の方との情報交換も積極的に行っています。
+              私自身、この変革の只中で働きながら、新しい働き方の可能性を探求しています。企業の方、副業・兼業に関心のある方、プロジェクトエコノミーについて考えている方——ぜひ対話の機会をいただければと思います。
             </p>
           </Card>
         </div>
@@ -147,26 +156,31 @@ export default function ProfilePage() {
         <div className="max-w-5xl mx-auto">
           <Card className="bg-gradient-to-r from-brand-slate-100 to-brand-gold-50 dark:from-brand-navy-800 dark:to-brand-navy-700 border-brand-slate-200 dark:border-brand-navy-600 p-8 lg:p-12 shadow-xl">
             <h2 className="text-3xl sm:text-4xl font-playfair font-bold mb-8 text-center text-brand-navy-900 dark:text-white">
-              ご相談・情報交換のお誘い
+              対話の場
             </h2>
 
             <div className="space-y-4 mb-10">
               <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 flex items-start font-inter">
                 <span className="text-brand-gold-600 mr-3 mt-1">▶</span>
-                副業/兼業について法人/個人利用どちらもご相談受け付けています
+                プロジェクトエコノミーの可能性について
               </p>
               <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 flex items-start font-inter">
                 <span className="text-brand-gold-600 mr-3 mt-1">▶</span>
-                生成AIを活用した組織設計についての意見交換
+                AIと人間の協働のあり方について
               </p>
               <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 flex items-start font-inter">
                 <span className="text-brand-gold-600 mr-3 mt-1">▶</span>
-                生成AI活用の情報交換
+                副業・兼業を通じた新しい働き方について
+              </p>
+              <p className="text-lg text-brand-slate-700 dark:text-brand-slate-200 flex items-start font-inter">
+                <span className="text-brand-gold-600 mr-3 mt-1">▶</span>
+                地方におけるプロジェクトエコノミーの展開について
               </p>
             </div>
 
             <p className="text-lg text-brand-slate-600 dark:text-brand-slate-300 leading-relaxed mb-10 text-center font-inter">
-              <span className="text-brand-navy-900 dark:text-white font-semibold">パーソルイノベーション株式会社</span>での活動や、対話形式でぜひお気軽に情報交換の機会をいただけたらと思います！
+              これらのテーマに関心がある方、あるいは全く違う視点をお持ちの方、<br />
+              ぜひ対話の機会をいただければ嬉しいです。
             </p>
 
             <div className="flex justify-center">
@@ -176,7 +190,7 @@ export default function ProfilePage() {
                   size="lg"
                   className="bg-brand-navy-900 dark:bg-white text-white dark:text-brand-navy-900 hover:bg-brand-navy-800 dark:hover:bg-brand-slate-100 px-8 py-4 text-base font-montserrat font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  お問い合わせ・情報交換はこちら
+                  連絡する
                   <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
