@@ -92,31 +92,24 @@ export default function Portfolio() {
               className="overflow-hidden group bg-white dark:bg-brand-navy-800 border-brand-slate-200 dark:border-brand-navy-700"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Project Image Placeholder */}
-              <div className="h-48 bg-gradient-to-br from-brand-slate-200 to-brand-slate-300 dark:from-brand-navy-700 dark:to-brand-navy-600 relative overflow-hidden">
-                <div className="absolute inset-0 bg-brand-navy-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-montserrat font-semibold">
-                    詳細を見る
-                  </div>
+              <div className="p-8 space-y-4">
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-2xl font-playfair font-bold text-brand-navy-900 dark:text-white group-hover:text-brand-gold-600 dark:group-hover:text-brand-gold-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  {project.featured && (
+                    <span className="bg-brand-gold-500 text-brand-navy-900 px-3 py-1 rounded-full text-xs font-montserrat font-bold whitespace-nowrap ml-3">
+                      FEATURED
+                    </span>
+                  )}
                 </div>
-                {project.featured && (
-                  <div className="absolute top-4 right-4 bg-brand-gold-500 text-brand-navy-900 px-3 py-1 rounded-full text-xs font-montserrat font-bold">
-                    FEATURED
-                  </div>
-                )}
-              </div>
 
-              <div className="p-6 space-y-4">
-                <h3 className="text-xl font-playfair font-bold text-brand-navy-900 dark:text-white mb-3 group-hover:text-brand-gold-600 dark:group-hover:text-brand-gold-400 transition-colors">
-                  {project.title}
-                </h3>
-
-                <p className="text-brand-slate-600 dark:text-brand-slate-300 line-clamp-3 font-inter">
+                <p className="text-brand-slate-600 dark:text-brand-slate-300 line-clamp-3 font-inter leading-relaxed mb-6">
                   {project.description}
                 </p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
@@ -128,7 +121,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-3 mt-6">
+                <div className="flex gap-3">
                   {project.liveUrl && (
                     <Button
                       variant="primary"

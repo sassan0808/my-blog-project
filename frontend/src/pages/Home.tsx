@@ -153,29 +153,12 @@ export default function Home() {
                   key={project.id}
                   className="group bg-white dark:bg-brand-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-brand-slate-200 dark:border-brand-navy-700"
                 >
-                  {/* Project Image */}
-                  <div className="relative overflow-hidden aspect-video bg-brand-slate-100 dark:bg-brand-navy-700">
-                    {project.image ? (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <div className="text-6xl font-playfair font-bold text-brand-slate-300 dark:text-brand-navy-600">
-                          {project.title.charAt(0)}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-playfair font-semibold mb-3 text-brand-navy-900 dark:text-white group-hover:text-brand-gold-600 dark:group-hover:text-brand-gold-400 transition-colors">
+                  <div className="p-8">
+                    <h3 className="text-2xl font-playfair font-semibold mb-4 text-brand-navy-900 dark:text-white group-hover:text-brand-gold-600 dark:group-hover:text-brand-gold-400 transition-colors">
                       {project.title}
                     </h3>
 
-                    <p className="text-brand-slate-600 dark:text-brand-slate-300 mb-4 line-clamp-2 font-inter">
+                    <p className="text-brand-slate-600 dark:text-brand-slate-300 mb-6 line-clamp-3 font-inter leading-relaxed">
                       {project.description}
                     </p>
 
@@ -184,13 +167,13 @@ export default function Home() {
                       {project.technologies.slice(0, 3).map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-xs font-montserrat font-medium bg-brand-slate-100 dark:bg-brand-navy-700 text-brand-navy-700 dark:text-brand-slate-300 rounded-full"
+                          className="px-3 py-1 text-sm font-montserrat font-medium bg-brand-slate-100 dark:bg-brand-navy-700 text-brand-navy-700 dark:text-brand-slate-300 rounded-full"
                         >
                           {tech}
                         </span>
                       ))}
                       {project.technologies.length > 3 && (
-                        <span className="px-3 py-1 text-xs font-montserrat text-brand-slate-500">
+                        <span className="px-3 py-1 text-sm font-montserrat text-brand-slate-500">
                           +{project.technologies.length - 3}
                         </span>
                       )}
