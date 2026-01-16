@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { DataService } from '../lib/data'
 import type { Project } from '../types/portfolio'
 import type { Post } from '../types/post'
-import Card from '../components/ui/Card'
 import Button from '../components/ui/Button'
 
 export default function Home() {
