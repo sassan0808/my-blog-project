@@ -84,15 +84,22 @@ export default function BlogList() {
   return (
     <>
       <SEOHead
-        title="My Blog | ブログ記事一覧"
-        description="Sanity連携ブログサイトの記事一覧ページです。"
+        title="ブログ | Sasaki"
+        description="ビジネスに役立つAI活用、組織開発、Well-beingに関する記事をお届けします。"
         url={window.location.origin}
       />
-      <div className="min-h-screen pt-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">
-          ブログ記事一覧
-        </h1>
+      <div className="min-h-screen pt-20 bg-brand-slate-50 dark:bg-brand-navy-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* ヘッダーセクション */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl sm:text-5xl font-playfair font-bold text-brand-navy-900 dark:text-white mb-4">
+            ブログ記事
+          </h1>
+          <div className="w-20 h-1 bg-brand-gold-500 mx-auto mb-6"></div>
+          <p className="text-lg text-brand-slate-600 dark:text-brand-slate-300 max-w-2xl mx-auto font-inter">
+            ビジネスの成長を加速させる実践的なインサイトとアドバイス
+          </p>
+        </div>
         
         {/* API エラー表示 */}
         {apiError && (
@@ -110,14 +117,14 @@ export default function BlogList() {
         )}
         
         {/* カテゴリーフィルター */}
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-2">
+        <div className="mb-12">
+          <div className="flex flex-wrap gap-3 justify-center">
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`px-6 py-2.5 rounded-lg font-montserrat font-medium transition-all duration-200 ${
                 selectedCategory === null
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                  ? 'bg-brand-navy-900 dark:bg-white text-white dark:text-brand-navy-900 shadow-lg'
+                  : 'bg-white dark:bg-brand-navy-800 text-brand-slate-700 dark:text-brand-slate-300 hover:bg-brand-slate-100 dark:hover:bg-brand-navy-700 border border-brand-slate-200 dark:border-brand-navy-700'
               }`}
             >
               全て
@@ -126,10 +133,10 @@ export default function BlogList() {
               <button
                 key={category._id}
                 onClick={() => setSelectedCategory(category._id)}
-                className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+                className={`px-6 py-2.5 rounded-lg font-montserrat font-medium transition-all duration-200 ${
                   selectedCategory === category._id
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                    ? 'bg-brand-navy-900 dark:bg-white text-white dark:text-brand-navy-900 shadow-lg'
+                    : 'bg-white dark:bg-brand-navy-800 text-brand-slate-700 dark:text-brand-slate-300 hover:bg-brand-slate-100 dark:hover:bg-brand-navy-700 border border-brand-slate-200 dark:border-brand-navy-700'
                 }`}
               >
                 {category.title}
@@ -139,49 +146,62 @@ export default function BlogList() {
         </div>
         
         {filteredPosts.length === 0 ? (
-          <p className="text-gray-600 dark:text-gray-400">
-            記事がまだありません。
-          </p>
+          <div className="text-center py-16">
+            <p className="text-lg text-brand-slate-600 dark:text-brand-slate-400 font-inter">
+              該当する記事がありません。
+            </p>
+          </div>
         ) : (
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredPosts
               .filter((post) => post.slug?.current)
               .map((post) => (
               <article
                 key={post._id}
-                className="border-b border-gray-200 dark:border-gray-700 pb-6"
+                className="bg-white dark:bg-brand-navy-800 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-brand-slate-200 dark:border-brand-navy-700"
               >
                 <Link
                   to={`/blog/${post.slug?.current}`}
-                  className="block hover:bg-gray-50 dark:hover:bg-gray-800 p-4 -mx-4 rounded-lg transition-colors"
+                  className="block group"
                 >
-                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {post.title}
-                  </h2>
-                  <div className="flex items-center gap-4 mb-2">
-                    <time className="text-sm text-gray-600 dark:text-gray-400">
-                      {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
-                    {post.categories && post.categories.length > 0 && (
-                      <div className="flex gap-2">
-                        {post.categories.map((category) => (
-                          <span
-                            key={category._id}
-                            className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full"
-                          >
-                            {category.title}
-                          </span>
-                        ))}
-                      </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <time className="text-sm text-brand-slate-500 dark:text-brand-slate-400 font-montserrat">
+                        {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}
+                      </time>
+                      {post.categories && post.categories.length > 0 && (
+                        <div className="flex gap-2">
+                          {post.categories.map((category) => (
+                            <span
+                              key={category._id}
+                              className="text-xs px-3 py-1 bg-brand-gold-500/10 text-brand-gold-700 dark:text-brand-gold-400 rounded-full font-montserrat font-medium"
+                            >
+                              {category.title}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <h2 className="text-xl font-playfair font-semibold text-brand-navy-900 dark:text-white mb-3 group-hover:text-brand-gold-600 dark:group-hover:text-brand-gold-400 transition-colors line-clamp-2">
+                      {post.title}
+                    </h2>
+
+                    {post.tags && post.tags.length > 0 && (
+                      <TagList tags={post.tags} size="small" className="mb-3" />
                     )}
+
+                    <div className="flex items-center text-brand-navy-700 dark:text-brand-slate-300 font-montserrat font-medium text-sm mt-4">
+                      続きを読む
+                      <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
                   </div>
-                  {post.tags && post.tags.length > 0 && (
-                    <TagList tags={post.tags} size="small" className="mb-2" />
-                  )}
                 </Link>
               </article>
             ))}

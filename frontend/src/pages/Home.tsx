@@ -9,7 +9,6 @@ import Button from '../components/ui/Button'
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<Project[]>([])
   const [latestPosts, setLatestPosts] = useState<Post[]>([])
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const loadData = async () => {
@@ -27,226 +26,205 @@ export default function Home() {
     loadData()
   }, [])
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Hero Section - ULTRA VIBE MODE */}
-      <section className="relative min-h-screen flex items-center justify-center">
-        {/* Dynamic Gradient Background */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-700 to-pink-600 opacity-30 animate-gradient-xy"></div>
-          <div className="absolute inset-0 bg-gradient-to-tr from-purple-800 via-pink-600 to-orange-500 opacity-20 animate-gradient-xy animation-delay-2000"></div>
+    <div className="min-h-screen bg-white dark:bg-brand-navy-900 text-brand-navy-900 dark:text-white">
+      {/* Hero Section - エレガントでプロフェッショナル */}
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-slate-50 to-white dark:from-brand-navy-900 dark:to-brand-navy-800">
+        {/* 控えめな装飾 */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-brand-gold-500/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-brand-navy-500/5 rounded-full blur-3xl"></div>
         </div>
-
-        {/* Animated Orbs */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-blob"></div>
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-blob animation-delay-4000"></div>
-        </div>
-
-        {/* Particle Effect Container */}
-        <div 
-          className="absolute inset-0 overflow-hidden"
-          style={{
-            background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 255, 255, 0.2) 0%, transparent 25%)`,
-          }}
-        />
-
-        {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='white' stroke-width='0.5' opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)'/%3E%3C/svg%3E")`
-          }}
-        ></div>
 
         {/* Content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-          {/* Core Message */}
-          <div className="mb-6 inline-block">
-            <span className="text-sm font-mono text-neon-blue uppercase tracking-[0.2em] animate-pulse">
-              △→〇 循環型の社会へ
+        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto py-32">
+          {/* タグライン */}
+          <div className="mb-8 inline-block">
+            <span className="text-sm font-montserrat text-brand-gold-600 dark:text-brand-gold-400 uppercase tracking-widest font-semibold">
+              Professional Business Solutions
             </span>
           </div>
 
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black mb-8 relative">
-            <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
-              創造性を
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-playfair font-bold mb-8 leading-tight">
+            <span className="block text-brand-navy-900 dark:text-white">
+              AIを活用した
             </span>
-            <span className="block text-white mt-2">
-              解放する
+            <span className="block text-brand-navy-700 dark:text-brand-slate-200 mt-2">
+              組織開発コンサルティング
             </span>
-            <span className="absolute -inset-1 blur-lg bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-30 animate-pulse"></span>
           </h1>
 
-          <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            AIを
-            <span className="text-neon-blue font-bold">パートナー</span>
-            に、あなたの内側にある答えを見つけ出し、
-            <span className="text-neon-purple font-bold">唯一無二の個性</span>
-            を育てていく
+          <p className="text-lg sm:text-xl text-brand-slate-600 dark:text-brand-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed font-inter">
+            企業の成長を加速させる戦略的なAI導入と組織変革を支援します。
+            データドリブンなアプローチで、持続可能なビジネスの成長を実現します。
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link to="/portfolio">
-              <Button 
-                variant="gradient" 
-                size="lg" 
-                className="group relative overflow-hidden px-8 py-4 text-lg font-bold animate-glow"
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/contact">
+              <Button
+                variant="gradient"
+                size="lg"
+                className="bg-brand-navy-900 dark:bg-white text-white dark:text-brand-navy-900 hover:bg-brand-navy-800 dark:hover:bg-brand-slate-100 px-8 py-4 text-base font-montserrat font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <span className="relative z-10 flex items-center">
-                  創造の旅を始める
-                  <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 animate-gradient-x"></div>
+                お問い合わせ
+                <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </Button>
             </Link>
 
-            <Link to="/contact">
-              <Button 
-                variant="ghost" 
-                size="lg" 
-                className="border-2 border-white/20 hover:border-white/40 backdrop-blur-sm px-8 py-4 text-lg font-bold"
+            <Link to="/portfolio">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="border-2 border-brand-navy-900 dark:border-white text-brand-navy-900 dark:text-white hover:bg-brand-navy-900 hover:text-white dark:hover:bg-white dark:hover:text-brand-navy-900 px-8 py-4 text-base font-montserrat font-semibold transition-all duration-300"
               >
-                対話を始める
+                事例を見る
               </Button>
             </Link>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full p-1">
-              <div className="w-1 h-3 bg-white/50 rounded-full mx-auto animate-pulse"></div>
+          {/* 信頼性の指標 */}
+          <div className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl font-playfair font-bold text-brand-gold-600 dark:text-brand-gold-400 mb-2">50+</div>
+              <div className="text-sm text-brand-slate-600 dark:text-brand-slate-400 font-montserrat">プロジェクト</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-playfair font-bold text-brand-gold-600 dark:text-brand-gold-400 mb-2">98%</div>
+              <div className="text-sm text-brand-slate-600 dark:text-brand-slate-400 font-montserrat">顧客満足度</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-playfair font-bold text-brand-gold-600 dark:text-brand-gold-400 mb-2">5年+</div>
+              <div className="text-sm text-brand-slate-600 dark:text-brand-slate-400 font-montserrat">実績</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects - CYBERPUNK STYLE */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/20 to-transparent"></div>
-        
-        <div className="relative max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl font-black mb-6">
-              <span className="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent">
-                AI × 組織開発 × Well-being
-              </span>
+      {/* サービス概要セクション */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-brand-navy-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-6 text-brand-navy-900 dark:text-white">
+              提供サービス
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              正解は外にあるのではない。あなたの中にある創造性が、循環型社会への扉を開く。
+            <div className="w-20 h-1 bg-brand-gold-500 mx-auto mb-6"></div>
+            <p className="text-lg text-brand-slate-600 dark:text-brand-slate-300 max-w-2xl mx-auto font-inter">
+              AI技術、組織開発、Well-beingの融合により、企業の持続的な成長をサポートします。
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'AI活用コンサルティング',
+                description: '最先端のAI技術を活用し、業務効率化とイノベーションを実現します。',
+                icon: '🤖'
+              },
+              {
+                title: '組織開発支援',
+                description: 'チームのパフォーマンスを最大化し、持続可能な組織文化を構築します。',
+                icon: '👥'
+              },
+              {
+                title: 'Well-being推進',
+                description: '従業員のウェルビーイングを向上させ、生産性と創造性を引き出します。',
+                icon: '🌟'
+              }
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="bg-brand-slate-50 dark:bg-brand-navy-700 rounded-lg p-8 hover:shadow-xl transition-all duration-300 border border-brand-slate-200 dark:border-brand-navy-600"
+              >
+                <div className="text-5xl mb-4">{service.icon}</div>
+                <h3 className="text-xl font-playfair font-semibold mb-3 text-brand-navy-900 dark:text-white">
+                  {service.title}
+                </h3>
+                <p className="text-brand-slate-600 dark:text-brand-slate-300 font-inter leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects - ビジネススタイル */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-brand-slate-50 dark:bg-brand-navy-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-6 text-brand-navy-900 dark:text-white">
+              プロジェクト実績
+            </h2>
+            <div className="w-20 h-1 bg-brand-gold-500 mx-auto mb-6"></div>
+            <p className="text-lg text-brand-slate-600 dark:text-brand-slate-300 max-w-2xl mx-auto font-inter">
+              これまでに手がけた主要なプロジェクトをご紹介します。
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
+            {featuredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group relative"
-                style={{ 
-                  animationDelay: `${index * 100}ms`,
-                  animation: 'fadeInUp 0.8s ease-out forwards',
-                  opacity: 0
-                }}
+                className="group bg-white dark:bg-brand-navy-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-brand-slate-200 dark:border-brand-navy-700"
               >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 blur-xl"></div>
-                
-                <Card 
-                  hover 
-                  className="relative bg-gray-900/90 backdrop-blur-xl border-gray-800 p-8 h-full transform transition-all duration-500 group-hover:scale-[1.02]"
-                >
-                  {/* Project Image Container */}
-                  <div className="relative mb-6 overflow-hidden rounded-lg aspect-video bg-gradient-to-br from-blue-900/50 to-purple-900/50">
-                    {project.image ? (
-                      <img 
-                        src={project.image} 
-                        alt={project.title}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <div className="text-6xl font-black text-gray-800">
-                          {project.title.charAt(0)}
-                        </div>
+                {/* Project Image */}
+                <div className="relative overflow-hidden aspect-video bg-brand-slate-100 dark:bg-brand-navy-700">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-6xl font-playfair font-bold text-brand-slate-300 dark:text-brand-navy-600">
+                        {project.title.charAt(0)}
                       </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
-                  </div>
+                    </div>
+                  )}
+                </div>
 
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-neon-blue transition-colors">
+                <div className="p-6">
+                  <h3 className="text-xl font-playfair font-semibold mb-3 text-brand-navy-900 dark:text-white group-hover:text-brand-gold-600 dark:group-hover:text-brand-gold-400 transition-colors">
                     {project.title}
                   </h3>
-                  
-                  <p className="text-gray-400 mb-6 line-clamp-2">
+
+                  <p className="text-brand-slate-600 dark:text-brand-slate-300 mb-4 line-clamp-2 font-inter">
                     {project.description}
                   </p>
 
                   {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2">
                     {project.technologies.slice(0, 3).map((tech) => (
-                      <span 
+                      <span
                         key={tech}
-                        className="px-3 py-1 text-xs font-mono bg-blue-900/30 border border-blue-500/30 rounded-full text-blue-300"
+                        className="px-3 py-1 text-xs font-montserrat font-medium bg-brand-slate-100 dark:bg-brand-navy-700 text-brand-navy-700 dark:text-brand-slate-300 rounded-full"
                       >
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 3 && (
-                      <span className="px-3 py-1 text-xs font-mono text-gray-500">
-                        +{project.technologies.length - 3} more
+                      <span className="px-3 py-1 text-xs font-montserrat text-brand-slate-500">
+                        +{project.technologies.length - 3}
                       </span>
                     )}
                   </div>
-
-                  {/* Links */}
-                  <div className="flex gap-4">
-                    {project.liveUrl && (
-                      <a 
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-medium text-neon-blue hover:text-neon-purple transition-colors"
-                      >
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                        Live Demo
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a 
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
-                      >
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        Source Code
-                      </a>
-                    )}
-                  </div>
-                </Card>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-12">
             <Link to="/portfolio">
-              <Button variant="ghost" size="lg" className="group">
-                すべての活動を見る
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="border-2 border-brand-navy-900 dark:border-white text-brand-navy-900 dark:text-white hover:bg-brand-navy-900 hover:text-white dark:hover:bg-white dark:hover:text-brand-navy-900 font-montserrat font-semibold"
+              >
+                すべての実績を見る
+                <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Button>
@@ -255,65 +233,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Blog Posts - MINIMAL IKEHAYA STYLE */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-blue-900/10">
+      {/* Latest Blog Posts - エレガントスタイル */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-brand-navy-800">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl font-black mb-6">
-              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-                内なる創造性を育てる
-              </span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-6 text-brand-navy-900 dark:text-white">
+              最新の記事
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              AI、組織開発、Well-beingの融合から生まれるアイデアと実験
+            <div className="w-20 h-1 bg-brand-gold-500 mx-auto mb-6"></div>
+            <p className="text-lg text-brand-slate-600 dark:text-brand-slate-300 max-w-2xl mx-auto font-inter">
+              ビジネスに役立つ最新のインサイトと実践的なアドバイスをお届けします。
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {latestPosts.map((post, index) => (
-              <Link 
-                key={post._id} 
+            {latestPosts.map((post) => (
+              <Link
+                key={post._id}
                 to={`/blog/${post.slug?.current}`}
                 className="group block"
-                style={{ 
-                  animationDelay: `${index * 100}ms`,
-                  animation: 'fadeInUp 0.8s ease-out forwards',
-                  opacity: 0
-                }}
               >
-                <article className="relative h-full">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-700 to-gray-800 rounded-2xl opacity-0 group-hover:opacity-50 transition duration-500 blur"></div>
-                  
-                  <div className="relative bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 h-full transform transition-all duration-500 group-hover:-translate-y-1">
-                    <time className="text-sm text-gray-500 font-mono">
-                      {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </time>
-                    
-                    <h3 className="text-2xl font-bold mt-4 mb-4 text-white group-hover:text-neon-blue transition-colors line-clamp-2">
-                      {post.title}
-                    </h3>
-                    
-                    <div className="flex items-center text-neon-purple font-medium">
-                      記事を読む
-                      <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
+                <article className="bg-brand-slate-50 dark:bg-brand-navy-700 rounded-lg p-8 h-full hover:shadow-xl transition-all duration-300 border border-brand-slate-200 dark:border-brand-navy-600">
+                  <time className="text-sm text-brand-slate-500 dark:text-brand-slate-400 font-montserrat">
+                    {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+
+                  <h3 className="text-xl font-playfair font-semibold mt-4 mb-4 text-brand-navy-900 dark:text-white group-hover:text-brand-gold-600 dark:group-hover:text-brand-gold-400 transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+
+                  <div className="flex items-center text-brand-navy-700 dark:text-brand-slate-300 font-montserrat font-medium text-sm">
+                    続きを読む
+                    <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </article>
               </Link>
             ))}
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-12">
             <Link to="/blog">
-              <Button variant="ghost" size="lg" className="group">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="border-2 border-brand-navy-900 dark:border-white text-brand-navy-900 dark:text-white hover:bg-brand-navy-900 hover:text-white dark:hover:bg-white dark:hover:text-brand-navy-900 font-montserrat font-semibold"
+              >
                 すべての記事を読む
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Button>
@@ -322,28 +294,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-32 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-transparent"></div>
-        
+      {/* CTA Section - プロフェッショナル */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-brand-navy-900 dark:bg-brand-navy-950 text-white">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-gold-500/5 rounded-full blur-3xl"></div>
+        </div>
+
         <div className="relative max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl font-black mb-8">
-            <span className="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent animate-gradient-x">
-              あなたの創造性を、一緒に解放しませんか
-            </span>
+          <h2 className="text-3xl sm:text-4xl font-playfair font-bold mb-6">
+            ビジネスの成長を、共に実現しましょう
           </h2>
-          
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            内側にある答えを見つけ出し、唯一無二の個性を育てる旅を、共に歩んでいきましょう。
+
+          <p className="text-lg text-brand-slate-300 mb-10 max-w-2xl mx-auto font-inter leading-relaxed">
+            戦略的なAI活用と組織開発で、あなたのビジネスを次のステージへ。
+            まずはお気軽にご相談ください。
           </p>
-          
+
           <Link to="/contact">
-            <Button 
-              variant="gradient" 
-              size="lg" 
-              className="animate-pulse-scale"
+            <Button
+              variant="gradient"
+              size="lg"
+              className="bg-brand-gold-500 hover:bg-brand-gold-600 text-brand-navy-900 px-10 py-4 text-base font-montserrat font-bold shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              対話を始める
+              無料相談を予約する
               <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>

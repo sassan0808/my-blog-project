@@ -26,57 +26,48 @@ export default function Navigation() {
   return (
     <>
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-black/80 backdrop-blur-xl border-b border-white/10' 
-          : 'bg-transparent'
+        scrolled
+          ? 'bg-white/95 dark:bg-brand-navy-900/95 backdrop-blur-md shadow-lg'
+          : 'bg-white/80 dark:bg-brand-navy-900/80 backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="group flex items-center space-x-2"
             >
               <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                <div className="relative bg-black px-4 py-2 rounded-lg">
-                  <span className="text-2xl font-black bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    SS
-                  </span>
-                </div>
+                <span className="text-2xl font-playfair font-bold text-brand-navy-900 dark:text-white tracking-tight">
+                  Sasaki
+                  <span className="text-brand-gold-500">.</span>
+                </span>
               </div>
             </Link>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               {navigation.map((item) => {
-                const isActive = location.pathname === item.href || 
+                const isActive = location.pathname === item.href ||
                   (item.href === '/blog' && location.pathname.startsWith('/blog'))
-                
+
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="relative group px-4 py-2"
+                    className="relative group px-5 py-2"
                   >
-                    <span className={`relative z-10 text-sm font-medium transition-colors ${
+                    <span className={`relative z-10 text-sm font-montserrat font-medium transition-colors ${
                       isActive
-                        ? 'text-white'
-                        : 'text-gray-300 group-hover:text-white'
+                        ? 'text-brand-navy-900 dark:text-white'
+                        : 'text-brand-slate-600 dark:text-brand-slate-300 group-hover:text-brand-navy-900 dark:group-hover:text-white'
                     }`}>
                       {item.name}
                     </span>
-                    
-                    {/* Hover Effect */}
-                    <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
-                      isActive
-                        ? 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 scale-100'
-                        : 'bg-gradient-to-r from-blue-600/0 to-purple-600/0 scale-95 group-hover:scale-100 group-hover:from-blue-600/10 group-hover:to-purple-600/10'
-                    }`}></div>
-                    
+
                     {/* Active Indicator */}
                     {isActive && (
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"></div>
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-brand-gold-500"></div>
                     )}
                   </Link>
                 )
@@ -88,18 +79,18 @@ export default function Navigation() {
               <DarkModeToggle />
               
               {/* Mobile Menu Button */}
-              <button 
+              <button
                 className="md:hidden relative w-10 h-10 flex items-center justify-center ml-2"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 <div className="w-6 flex flex-col justify-center items-center">
-                  <span className={`bg-white block h-0.5 w-full rounded-sm transition-all duration-300 ${
+                  <span className={`bg-brand-navy-900 dark:bg-white block h-0.5 w-full rounded-sm transition-all duration-300 ${
                     mobileMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-1'
                   }`}></span>
-                  <span className={`bg-white block h-0.5 w-full rounded-sm transition-all duration-300 ${
+                  <span className={`bg-brand-navy-900 dark:bg-white block h-0.5 w-full rounded-sm transition-all duration-300 ${
                     mobileMenuOpen ? 'opacity-0' : 'opacity-100'
                   }`}></span>
-                  <span className={`bg-white block h-0.5 w-full rounded-sm transition-all duration-300 ${
+                  <span className={`bg-brand-navy-900 dark:bg-white block h-0.5 w-full rounded-sm transition-all duration-300 ${
                     mobileMenuOpen ? '-rotate-45 -translate-y-1' : 'translate-y-1'
                   }`}></span>
                 </div>
@@ -114,31 +105,31 @@ export default function Navigation() {
         mobileMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
       }`}>
         {/* Backdrop */}
-        <div 
-          className={`absolute inset-0 bg-black transition-opacity duration-500 ${
-            mobileMenuOpen ? 'opacity-80' : 'opacity-0'
+        <div
+          className={`absolute inset-0 bg-brand-navy-900/80 dark:bg-black/80 transition-opacity duration-500 ${
+            mobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
           onClick={() => setMobileMenuOpen(false)}
         ></div>
-        
+
         {/* Menu Panel */}
-        <div className={`absolute right-0 top-0 h-full w-64 bg-gray-900 transform transition-transform duration-500 ${
+        <div className={`absolute right-0 top-0 h-full w-64 bg-white dark:bg-brand-navy-800 shadow-2xl transform transition-transform duration-500 ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           <div className="p-6 pt-24">
             <div className="space-y-2">
               {navigation.map((item) => {
-                const isActive = location.pathname === item.href || 
+                const isActive = location.pathname === item.href ||
                   (item.href === '/blog' && location.pathname.startsWith('/blog'))
-                
+
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`block px-4 py-3 rounded-lg text-lg font-medium transition-all ${
+                    className={`block px-4 py-3 rounded-lg text-base font-montserrat font-medium transition-all ${
                       isActive
-                        ? 'bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-white'
-                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                        ? 'bg-brand-gold-500/10 text-brand-navy-900 dark:text-white border-l-3 border-brand-gold-500'
+                        : 'text-brand-slate-600 dark:text-brand-slate-300 hover:bg-brand-slate-100 dark:hover:bg-brand-navy-700 hover:text-brand-navy-900 dark:hover:text-white'
                     }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
